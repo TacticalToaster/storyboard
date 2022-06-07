@@ -2139,9 +2139,9 @@ function Clockwork:Tick()
 		self.NextSaveData = sysTime + cwConfig:Get("save_data_interval"):Get();
 	end;
 
-	// Optimization: Instead of checking if server is empty every 1200 seconds to restart the map, I'll just add a check on player disconnect
+	// Optimization TODO: Instead of checking if server is empty every 1200 seconds to restart the map, I'll just add a check on player disconnect
 
-	// Should probably see if I can improve this...
+	// Optimization TODO: Should probably see if I can improve this...
 	for k, v in pairs(plyTable) do
 		if (v:HasInitialized()) then
 			if (!v.cwNextThink) then
