@@ -2156,18 +2156,9 @@ function Clockwork:Tick()
 		self.NextSaveData = sysTime + cwConfig:Get("save_data_interval"):Get();
 	end;
 
-	if (!self.NextCheckEmpty) then
-		self.NextCheckEmpty = sysTime + 1200;
-	end;
+	// Optimization: Instead of checking if server is empty every 1200 seconds to restart the map, I'll just add a check on player disconnect
 
-	if (sysTime >= self.NextCheckEmpty) then
-		self.NextCheckEmpty = nil;
-
-		if (#plyTable == 0) then
-			RunConsoleCommand("changelevel", game.GetMap());
-		end;
-	end;
-
+	// Should probably see if I can improve this...
 	for k, v in pairs(plyTable) do
 		if (v:HasInitialized()) then
 			if (!v.cwNextThink) then
@@ -2184,23 +2175,7 @@ function Clockwork:Tick()
 		end;
 	end;
 
-	if (self.config:Get("enable_disease"):GetBoolean()) then
-		local nextDisease = self.nextDisease;
-
-		if (!nextDisease or nextDisease < CurTime()) then
-			for k, v in pairs(plyTable) do
-				if (Clockwork.player:HasDiseases(v)) then
-					local symptoms = Clockwork.player:GetSymptoms(v);
-
-					for k2, v2 in pairs(symptoms) do
-						v2(v);
-					end;
-				end;
-			end;
-
-			self.nextDisease = CurTime() + self.config:Get("disease_interval"):Get();
-		end;
-	end;
+	// Optimization: Gutting disease, will make optional plugin (10 times better too)
 end;
 
 --[[
@@ -4156,7 +4131,7 @@ function Clockwork:PlayerCharacterInitialized(player)
 	if (rankTable and rankTable.class and cwClass:GetAll()[rankTable.class]) then
 		cwClass:Set(player, rankTable.class);
 	end;
-	
+
 	cwPlugin:Call("PostPlayerCharacterInitialized", player);
 end;
 
@@ -4674,7 +4649,7 @@ function Clockwork:DoPlayerDeath(player, attacker, damageInfo)
 			end;
 		end);
 	end;
-	
+
 	if (cwPlugin:Call("PlayerCanDeathStripAmmo", player, attacker, damageInfo)) then
 		player:SetCharacterData("Ammo", {}, true);
 		player:StripAmmo();
@@ -5042,7 +5017,7 @@ function Clockwork:EntityTakeDamage(entity, damageInfo)
 
 				if (damageInfo:GetDamage() > 0) then
 					cwKernel:CalculatePlayerDamage(player, lastHitGroup, damageInfo);
-					
+
 					if (cwPlugin:Call("PlayerCanTakeKnockbackFromDamage", entity, damageInfo)) then
 						player:SetVelocity(cwKernel:ConvertForce(damageInfo:GetDamageForce() * 32, 200));
 					end;
@@ -5850,26 +5825,26 @@ end;
 
 function ClockworkPlayerSay(player, text)
 	CLOCKWORK_PLAYERSAY_OVERRIDE = true;
-	
+
 	text = hook.Call("PlayerSay", Clockwork, player, text, true);
-	
+
 	CLOCKWORK_PLAYERSAY_OVERRIDE = nil;
-	
+
 	if (text == "") then
 		return;
 	end;
-	
+
 	local maxChatLength = Clockwork.config:Get("max_chat_length"):Get();
 	local prefix = Clockwork.config:Get("command_prefix"):Get();
 	local curTime = CurTime();
-	
+
 	if (string.len(text) >= maxChatLength) then
 		text = string.sub(text, 0, maxChatLength);
 	end;
-	
+
 	if (string.sub(text, 1, 2) == "//") then
 		text = string.Trim(string.sub(text, 3));
-	
+
 		if (text != "") then
 			if (Clockwork.plugin:Call("PlayerCanSayOOC", player, text)) then
 				if (!player.cwNextTalkOOC or curTime > player.cwNextTalkOOC or player:IsAdmin()) then
@@ -5880,7 +5855,7 @@ function ClockworkPlayerSay(player, text)
 					Clockwork.player:Notify(
 						player, "You cannot cannot talk out-of-character for another "..math.ceil(player.cwNextTalkOOC - CurTime()).." second(s)!"
 					);
-	
+
 					return;
 				end;
 			end;
@@ -5891,7 +5866,7 @@ function ClockworkPlayerSay(player, text)
 		else
 			text = string.Trim(string.sub(text, 3));
 		end;
-	
+
 		if (text != "") then
 			if (Clockwork.plugin:Call("PlayerCanSayLOOC", player, text)) then
 				Clockwork.kernel:ServerLog("[LOOC] "..player:Name()..": "..text);
@@ -5902,11 +5877,11 @@ function ClockworkPlayerSay(player, text)
 		local prefixLength = string.len(prefix);
 		local arguments = Clockwork.kernel:ExplodeByTags(text, " ", "\"", "\"", true);
 		local command = string.sub(arguments[1], prefixLength + 1);
-	
+
 		if (Clockwork.command.stored[command] and Clockwork.command.stored[command].arguments < 2
 			and !Clockwork.command.stored[command].optionalArguments) then
 			text = string.sub(text, string.len(command) + prefixLength + 2);
-	
+
 			if (text != "") then
 				arguments = {command, text};
 			else
@@ -5915,16 +5890,16 @@ function ClockworkPlayerSay(player, text)
 		else
 			arguments[1] = command;
 		end;
-	
+
 		Clockwork.command:ConsoleCommand(player, "cwCmd", arguments);
 	elseif (Clockwork.plugin:Call("PlayerCanSayIC", player, text)) then
 		Clockwork.chatBox:AddInRadius(player, "ic", text, player:GetPos(), Clockwork.config:Get("talk_radius"):Get());
-	
+
 		if (Clockwork.player:GetDeathCode(player, true)) then
 			Clockwork.player:UseDeathCode(player, nil, {text});
 		end;
 	end;
-	
+
 	if (Clockwork.player:GetDeathCode(player)) then
 		Clockwork.player:TakeDeathCode(player);
 	end;
@@ -5961,13 +5936,13 @@ function playerMeta:SetCharacterData(key, value, bFromBase)
 
 		if (character[key] ~= nil) then
 			local oldValue = character[key];
-			
+
 			character[key] = value;
 			Clockwork.plugin:Call("PlayerCharacterDataChanged", self, key, oldValue, value);
 		end;
 	else
 		local oldValue = character.data[key];
-		
+
 		character.data[key] = value;
 
 		if (value ~= oldValue) then
@@ -5980,7 +5955,7 @@ end;
 function playerMeta:SetData(key, value)
 	if (self.cwData) then
 		local oldValue = self.cwData[key];
-		
+
 		self.cwData[key] = value;
 
 		if (value ~= oldValue) then
