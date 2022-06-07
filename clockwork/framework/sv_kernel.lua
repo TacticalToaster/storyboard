@@ -2154,18 +2154,9 @@ function Clockwork:Tick()
 		self.NextSaveData = sysTime + cwConfig:Get("save_data_interval"):Get();
 	end;
 
-	if (!self.NextCheckEmpty) then
-		self.NextCheckEmpty = sysTime + 1200;
-	end;
+	// Optimization: Instead of checking if server is empty every 1200 seconds to restart the map, I'll just add a check on player disconnect
 
-	if (sysTime >= self.NextCheckEmpty) then
-		self.NextCheckEmpty = nil;
-
-		if (#plyTable == 0) then
-			RunConsoleCommand("changelevel", game.GetMap());
-		end;
-	end;
-
+	// Should probably see if I can improve this...
 	for k, v in pairs(plyTable) do
 		if (v:HasInitialized()) then
 			if (!v.cwNextThink) then
@@ -2182,23 +2173,7 @@ function Clockwork:Tick()
 		end;
 	end;
 
-	if (self.config:Get("enable_disease"):GetBoolean()) then
-		local nextDisease = self.nextDisease;
-
-		if (!nextDisease or nextDisease < CurTime()) then
-			for k, v in pairs(plyTable) do
-				if (Clockwork.player:HasDiseases(v)) then
-					local symptoms = Clockwork.player:GetSymptoms(v);
-
-					for k2, v2 in pairs(symptoms) do
-						v2(v);
-					end;
-				end;
-			end;
-
-			self.nextDisease = CurTime() + self.config:Get("disease_interval"):Get();
-		end;
-	end;
+	// Optimization: Gutting disease, will make optional plugin (10 times better too)
 end;
 
 --[[
