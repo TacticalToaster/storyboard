@@ -60,7 +60,7 @@ Clockwork.config:AddToSystem("CrouchWalkSpeed", "crouched_speed", "CrouchWalkSpe
 Clockwork.config:AddToSystem("MaximumChatLength", "max_chat_length", "MaximumChatLengthDesc", 0, 1024);
 Clockwork.config:AddToSystem("StartingFlags", "default_flags", "StartingFlagsDesc");
 Clockwork.config:AddToSystem("PlayerSprayEnabled", "disable_sprays", "PlayerSprayEnabledDesc");
-Clockwork.config:AddToSystem("HintInterval", "hint_interval", "HintIntervalDesc", 0, 7200);
+-- Gutting: Removal of Hint Interval.
 Clockwork.config:AddToSystem("OutOfCharacterChatInterval", "ooc_interval", "OutOfCharacterChatIntervalDesc", 0, 7200);
 Clockwork.config:AddToSystem("MinuteTime", "minute_time", "MinuteTimeDesc", 0, 7200);
 Clockwork.config:AddToSystem("DoorUnlockInterval", "unlock_time", "DoorUnlockIntervalDesc", 0, 7200);
@@ -80,7 +80,7 @@ Clockwork.config:AddToSystem("DoorLockInterval", "lock_time", "DoorLockIntervalD
 Clockwork.config:AddToSystem("MaximumOwnableDoors", "max_doors", "MaximumOwnableDoorsDesc");
 Clockwork.config:AddToSystem("EnableSpaceSystem", "enable_space_system", "EnableSpaceSystemDesc");
 Clockwork.config:AddToSystem("DrawIntroBars", "draw_intro_bars", "DrawIntroBarsDesc");
-Clockwork.config:AddToSystem("EnableJogging", "enable_jogging", "EnableJoggingDesc");
+-- Gutting: Removing config options for jogging.
 Clockwork.config:AddToSystem("EnableLOOCIcons", "enable_looc_icons", "EnableLOOCIconsDesc");
 Clockwork.config:AddToSystem("ShowBusinessMenu", "show_business", "ShowBusinessMenuDesc");
 Clockwork.config:AddToSystem("EnableChatMultiplier", "chat_multiplier", "EnableChatMultiplierDesc");

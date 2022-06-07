@@ -8,7 +8,7 @@
 
 local Clockwork = Clockwork;
 
---[[ 
+--[[
 	Never edit this file! All config editing should be done
 	either through the .cfg files provided or through the
 	in-game config editing systems.
@@ -87,7 +87,7 @@ Clockwork.config:Add("crouched_speed", 25);
 Clockwork.config:Add("default_flags", "", true);
 Clockwork.config:Add("disable_sprays", true);
 Clockwork.config:Add("owner_steamid", "STEAM_0:0:0000000", nil, nil, true, true, true);
-Clockwork.config:Add("hint_interval", 30);
+-- Gutting: Removal of hint interval.
 Clockwork.config:Add("ooc_interval", 120);
 Clockwork.config:Add("minute_time", 60, true);
 Clockwork.config:Add("voice_enabled", true);
@@ -106,7 +106,7 @@ Clockwork.config:Add("lock_time", 2);
 Clockwork.config:Add("max_doors", 5);
 Clockwork.config:Add("enable_space_system", false, true);
 Clockwork.config:Add("draw_intro_bars", true, true);
-Clockwork.config:Add("enable_jogging", false, true, true);
+-- Gutting: Removing config options for jogging.
 Clockwork.config:Add("enable_looc_icons", true, true, true);
 Clockwork.config:Add("show_business", true, true);
 Clockwork.config:Add("chat_multiplier", true, true, true);

@@ -1,5 +1,5 @@
 --[[
-	© CloudSixteen.com do not share, re-distribute or modify
+	ï¿½ CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 
 	Clockwork was created by Conna Wiles (also known as kurozael.)
@@ -32,7 +32,7 @@ playerMeta.SteamName = playerMeta.SteamName or playerMeta.Name;
 -- A function to get a player's name.
 function playerMeta:Name()
 	local name = self:GetSharedVar("Name");
-	
+
 	if (!name or name == "") then
 		return self:SteamName();
 	else
@@ -59,27 +59,16 @@ function playerMeta:IsRunning(bNoWalkSpeed)
 			return true;
 		end;
 	end;
-	
+
 	return false;
 end;
 
--- A function to get whether a player is jogging.
-function playerMeta:IsJogging(testSpeed)
-	if (!self:IsRunning() and (self:GetSharedVar("IsJogMode") or testSpeed)) then
-		if (self:Alive() and !self:IsRagdolled() and !self:InVehicle() and !self:Crouching()) then
-			if (self:GetVelocity():Length() > 0) then
-				return true;
-			end;
-		end;
-	end;
-	
-	return false;
-end;
+-- Gutting: Removed function for jogging.
 
 -- A function to get a player's forced animation.
 function playerMeta:GetForcedAnimation()
 	local forcedAnimation = self:GetSharedVar("ForceAnim");
-	
+
 	if (forcedAnimation != 0) then
 		return {
 			animation = forcedAnimation,
@@ -126,7 +115,7 @@ end;
 -- A function to get a player's faction.
 function playerMeta:GetFaction()
 	local index = self:GetSharedVar("Faction");
-	
+
 	if (cwFaction:FindByID(index)) then
 		return cwFaction:FindByID(index).name;
 	else
@@ -142,29 +131,29 @@ end;
 -- A function to get a player's data.
 function playerMeta:GetData(key, default)
 	local playerData = cwPly.playerData[key];
-	
+
 	if (playerData and (!playerData.playerOnly or self == Clockwork.Client)) then
 		return self:GetSharedVar(key);
 	end;
-	
+
 	return default;
 end;
 
 -- A function to get a player's character data.
 function playerMeta:GetCharacterData(key, default)
 	local characterData = cwPly.characterData[key];
-	
+
 	if (characterData and (!characterData.playerOnly or self == Clockwork.Client)) then
 		return self:GetSharedVar(key);
 	end;
-	
+
 	return default;
 end;
 
 -- A function to get a player's maximum armor.
 function playerMeta:GetMaxArmor(armor)
 	local maxArmor = self:GetSharedVar("MaxAP");
-	
+
 	if (maxArmor > 0) then
 		return maxArmor;
 	else
@@ -175,7 +164,7 @@ end;
 -- A function to get a player's maximum health.
 function playerMeta:GetMaxHealth(health)
 	local maxHealth = self:GetSharedVar("MaxHP");
-	
+
 	if (maxHealth > 0) then
 		return maxHealth;
 	else

@@ -24,7 +24,7 @@ end;
 -- A function to get a schema key translated.
 function Clockwork.option:Translate(key)
 	local value = T(self.keys[key]);
-	
+
 	if (lowerValue and type(value) == "string") then
 		return string.lower(value);
 	else
@@ -35,7 +35,7 @@ end;
 -- A function to get a schema key.
 function Clockwork.option:GetKey(key, lowerValue)
 	local value = self.keys[key];
-	
+
 	if (lowerValue and type(value) == "string") then
 		return string.lower(value);
 	else
@@ -56,7 +56,7 @@ end;
 -- A function to play a schema sound.
 function Clockwork.option:PlaySound(name)
 	local sound = self:GetSound(name);
-	
+
 	if (sound) then
 		if (CLIENT) then
 			surface.PlaySound(sound);
@@ -139,20 +139,20 @@ if (CLIENT) then
 	Clockwork.option:SetColor("columnsheet_text_normal", Color(255, 255, 255, 255));
 	Clockwork.option:SetColor("columnsheet_shadow_active", Color(255, 255, 255, 255));
 	Clockwork.option:SetColor("columnsheet_text_active", Color(50, 50, 50, 255));
-	
+
 	Clockwork.option:SetColor("attribute_base_color", Color(50, 50, 50, 255));
 	Clockwork.option:SetColor("attribute_progress_color", Color(175, 175, 175, 255));
 	Clockwork.option:SetColor("attribute_boost_color", Color(50, 255, 50, 255));
 	Clockwork.option:SetColor("attribute_hinder_color", Color(255, 50, 50, 255));
 	Clockwork.option:SetColor("attribute_main_color", Color(100, 100, 100, 255));
-	
+
 	Clockwork.option:SetColor("basic_form_highlight", Color(0, 0, 0, 255));
 	Clockwork.option:SetColor("basic_form_color_help", Color(50, 50, 50, 255));
 	Clockwork.option:SetColor("basic_form_color", Color(0, 0, 0, 255));
-	
+
 	Clockwork.option:SetColor("trait_gain_color", Color(50, 255, 50, 255));
 	Clockwork.option:SetColor("trait_loss_color", Color(255, 50, 50, 255));
-	
+
 	Clockwork.option:SetKey("icon_data_classes", {path = "", size = nil});
 	Clockwork.option:SetKey("icon_data_settings", {path = "", size = nil});
 	Clockwork.option:SetKey("icon_data_donations", {path = "", size = nil});
@@ -162,18 +162,18 @@ if (CLIENT) then
 	Clockwork.option:SetKey("icon_data_directory", {path = "", size = nil});
 	Clockwork.option:SetKey("icon_data_attributes", {path = "", size = nil});
 	Clockwork.option:SetKey("icon_data_business", {path = "", size = nil});
-	
+
 	Clockwork.option:SetKey("top_bar_width_scale", 0.3);
-	
+
 	Clockwork.option:SetKey("info_text_icon_size", 16);
 	Clockwork.option:SetKey("info_text_red_icon", "icon16/exclamation.png");
 	Clockwork.option:SetKey("info_text_green_icon", "icon16/tick.png");
 	Clockwork.option:SetKey("info_text_orange_icon", "icon16/error.png");
 	Clockwork.option:SetKey("info_text_blue_icon", "icon16/information.png");
-	
+
 	Clockwork.option:SetColor("scoreboard_name", Color(0, 0, 0, 255));
 	Clockwork.option:SetColor("scoreboard_desc", Color(0, 0, 0, 255));
-	
+
 	Clockwork.option:SetColor("positive_hint", Color(100, 175, 100, 255));
 	Clockwork.option:SetColor("negative_hint", Color(175, 100, 100, 255));
 	Clockwork.option:SetColor("background", Color(0, 0, 0, 125));
@@ -200,7 +200,7 @@ if (CLIENT) then
 	Clockwork.option:SetFont("menu_text_big", "cwMenuTextBig");
 	Clockwork.option:SetFont("chat_box_text", "cwMainText");
 	Clockwork.option:SetFont("large_3d_2d", "cwLarge3D2D");
-	Clockwork.option:SetFont("hints_text", "cwIntroTextTiny");
+	-- Gutting: Removal of Hint SetFont
 	Clockwork.option:SetFont("main_text", "cwMainText");
 	Clockwork.option:SetFont("bar_text", "cwMainText");
 	Clockwork.option:SetFont("esp_text", "cwESPText");

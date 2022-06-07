@@ -648,8 +648,7 @@ CW_SWEDISH["EnableSpaceSystem"] = "Aktivera Utrymmes Systemet";
 CW_SWEDISH["EnableSpaceSystemDesc"] = "Om man ska använda Utrymmes System för förråd.";
 CW_SWEDISH["DrawIntroBars"] = "Rita Introduktions Bars";
 CW_SWEDISH["DrawIntroBarsDesc"] = "Om man ska visa de svarta barsen när du valt din karaktär.";
-CW_SWEDISH["EnableJogging"] = "Aktiverar Joggning";
-CW_SWEDISH["EnableJoggingDesc"] = "Om joggning ska vara aktiverat.";
+-- Gutting: Removing language stuff for jogging.
 CW_SWEDISH["EnableLOOCIcons"] = "Aktivera LOOC Ikoner";
 CW_SWEDISH["EnableLOOCIconsDesc"] = "Om Ikoner ska visas i LOOC chatten.";
 CW_SWEDISH["ShowBusinessMenu"] = "Visa Affärs Menyn";

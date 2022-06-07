@@ -650,8 +650,7 @@ CW_GERMAN["EnableSpaceSystem"] = "Enable Space System";
 CW_GERMAN["EnableSpaceSystemDesc"] = "Whether or not to use the space system that affects inventories.";
 CW_GERMAN["DrawIntroBars"] = "Draw Intro Bars";
 CW_GERMAN["DrawIntroBarsDesc"] = "Whether or not to draw cinematic intro black bars on top and bottom of the screen.";
-CW_GERMAN["EnableJogging"] = "Enable Jogging";
-CW_GERMAN["EnableJoggingDesc"] = "Whether or not to enable jogging.";
+-- Gutting: Removing language stuff for jogging.
 CW_GERMAN["EnableLOOCIcons"] = "Enable LOOC Icons";
 CW_GERMAN["EnableLOOCIconsDesc"] = "Whether or not to enable LOOC chat icons.";
 CW_GERMAN["ShowBusinessMenu"] = "Show Business Menu";

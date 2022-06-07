@@ -658,8 +658,7 @@ CW_RUSSIAN["EnableSpaceSystem"] = "Включить систему места";
 CW_RUSSIAN["EnableSpaceSystemDesc"] = "Будет ли система места включена.";
 CW_RUSSIAN["DrawIntroBars"] = "Прорисовывать кинематографичные полосы";
 CW_RUSSIAN["DrawIntroBarsDesc"] = "Прорисовывать ли кинематографичные полосы при входе.";
-CW_RUSSIAN["EnableJogging"] = "Включить бег трусцой";
-CW_RUSSIAN["EnableJoggingDesc"] = "Будет ли включен бег трусцой.";
+-- Gutting: Removing language stuff for jogging.
 CW_RUSSIAN["EnableLOOCIcons"] = "Включить иконки в LOOC";
 CW_RUSSIAN["EnableLOOCIconsDesc"] = "Будут ли отображаться иконки в LOOC.";
 CW_RUSSIAN["ShowBusinessMenu"] = "Показывать меню бизнеса";

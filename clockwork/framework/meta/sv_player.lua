@@ -23,7 +23,7 @@ local cwDatabase = Clockwork.database;
 local cwDatastream = Clockwork.datastream;
 local cwFaction = Clockwork.faction;
 local cwInventory = Clockwork.inventory;
-local cwHint = Clockwork.hint;
+-- Gutting: Removal of local for Hint.
 local cwCommand = Clockwork.command;
 local cwClass = Clockwork.class;
 local cwVoice = Clockwork.voice;
@@ -48,7 +48,7 @@ playerMeta.SteamName = playerMeta.SteamName or playerMeta.Name;
 
 function playerMeta:NetworkAccessories()
 	local accessoryData = self:GetAccessoryData();
-	
+
 	Clockwork.datastream:Start(self, "AllAccessories", accessoryData);
 end;
 
@@ -56,17 +56,17 @@ function playerMeta:RemoveAccessory(itemTable)
 	if (not self:IsWearingAccessory(itemTable)) then
 		return;
 	end;
-	
+
 	local accessoryData = self:GetAccessoryData();
 	local uniqueID = itemTable("uniqueID");
 	local itemID = itemTable("itemID");
-	
+
 	accessoryData[itemID] = nil;
-	
+
 	Clockwork.datastream:Start(
 		self, "RemoveAccessory", {itemID = itemID}
 	);
-	
+
 	if (itemTable.OnWearAccessory) then
 		itemTable:OnWearAccessory(self, false);
 	end;
@@ -74,20 +74,20 @@ end;
 
 function playerMeta:HasAccessory(uniqueID)
 	local accessoryData = self:GetAccessoryData();
-	
+
 	for k, v in pairs(accessoryData) do
 		if (string.lower(v) == string.lower(uniqueID)) then
 			return true;
 		end;
 	end;
-	
+
 	return false;
 end;
 
 function playerMeta:IsWearingAccessory(itemTable)
 	local accessoryData = self:GetAccessoryData();
 	local itemID = itemTable("itemID");
-	
+
 	if (accessoryData[itemID]) then
 		return true;
 	else
@@ -99,17 +99,17 @@ function playerMeta:WearAccessory(itemTable)
 	if (self:IsWearingAccessory(itemTable)) then
 		return;
 	end;
-	
+
 	local accessoryData = self:GetAccessoryData();
 	local uniqueID = itemTable("uniqueID");
 	local itemID = itemTable("itemID");
-	
+
 	accessoryData[itemID] = itemTable("uniqueID");
-	
+
 	Clockwork.datastream:Start(
 		self, "AddAccessory", {itemID = itemID, uniqueID = uniqueID}
 	);
-	
+
 	if (itemTable.OnWearAccessory) then
 		itemTable:OnWearAccessory(self, true);
 	end;
@@ -118,7 +118,7 @@ end;
 -- A function to get a player's steamID64
 function playerMeta:SteamID64()
 	local value = self:ClockworkSteamID64();
-	
+
 	if (value == nil) then
 		return "";
 	else
@@ -143,7 +143,7 @@ end;
 -- A function to set whether a player is faking death.
 function playerMeta:SetFakingDeath(fakingDeath, killSilent)
 	self.fakingDeath = fakingDeath;
-	
+
 	if (!fakingDeath and killSilent) then
 		self:KillSilent();
 	end;
@@ -167,7 +167,7 @@ end;
 -- A function to get whether a player has a trait.
 function playerMeta:HasTrait(uniqueID)
 	local traits = self:GetCharacterData("Traits");
-	
+
 	if (traits and table.HasValue(traits, uniqueID)) then
 		return true;
 	end;
@@ -176,18 +176,18 @@ end;
 -- A function to give a weapon to a player.
 function playerMeta:Give(class, itemTable, bForceReturn)
 	local iTeamIndex = self:Team();
-	
+
 	if (!cwPlugin:Call("PlayerCanBeGivenWeapon", self, class, itemTable)) then
 		return;
 	end;
-	
+
 	if (self:IsRagdolled() and !bForceReturn) then
 		local ragdollWeapons = self:GetRagdollWeapons();
 		local spawnWeapon = cwPly:GetSpawnWeapon(self, class);
 		local bCanHolster = (itemTable and cwPlugin:Call("PlayerCanHolsterWeapon", self, itemTable, true, true));
-		
+
 		if (!spawnWeapon) then iTeamIndex = nil; end;
-		
+
 		for k, v in pairs(ragdollWeapons) do
 			if (v.weaponData["class"] == class
 			and v.weaponData["itemTable"] == itemTable) then
@@ -196,7 +196,7 @@ function playerMeta:Give(class, itemTable, bForceReturn)
 				return;
 			end;
 		end;
-		
+
 		ragdollWeapons[#ragdollWeapons + 1] = {
 			weaponData = {
 				class = class,
@@ -209,26 +209,26 @@ function playerMeta:Give(class, itemTable, bForceReturn)
 		self.cwForceGive = true;
 			self:ClockworkGive(class);
 		self.cwForceGive = nil;
-		
+
 		local weapon = self:GetWeapon(class);
-		
+
 		if (IsValid(weapon) and itemTable) then
 			cwDatastream:Start(self, "WeaponItemData", {
 				definition = cwItem:GetDefinition(itemTable, true),
 				weapon = weapon:EntIndex()
 			});
-			
+
 			weapon:SetNetworkedString(
 				"ItemID", tostring(itemTable("itemID"))
 			);
 			weapon.cwItemTable = itemTable;
-			
+
 			if (itemTable.OnWeaponGiven) then
 				itemTable:OnWeaponGiven(self, weapon);
 			end;
 		end;
 	end;
-	
+
 	cwPlugin:Call("PlayerGivenWeapon", self, class, itemTable);
 end;
 
@@ -280,28 +280,17 @@ function playerMeta:IsRunning(bNoWalkSpeed)
 			return true;
 		end;
 	end;
-	
+
 	return false;
 end;
 
--- A function to get whether a player is jogging.
-function playerMeta:IsJogging(testSpeed)
-	if (!self:IsRunning() and (self:GetSharedVar("IsJogMode") or testSpeed)) then
-		if (self:Alive() and !self:IsRagdolled() and !self:InVehicle() and !self:Crouching()) then
-			if (self:GetVelocity():Length() > 0) then
-				return true;
-			end;
-		end;
-	end;
-	
-	return false;
-end;
+-- Gutting: Removed function for jogging.
 
 -- A function to strip a weapon from a player.
 function playerMeta:StripWeapon(weaponClass)
 	if (self:IsRagdolled()) then
 		local ragdollWeapons = self:GetRagdollWeapons();
-		
+
 		for k, v in pairs(ragdollWeapons) do
 			if (v.weaponData["class"] == weaponClass) then
 				weapons[k] = nil;
@@ -321,17 +310,17 @@ end;
 function playerMeta:HandleAttributeProgress(curTime)
 	if (self.cwAttrProgressTime and curTime >= self.cwAttrProgressTime) then
 		self.cwAttrProgressTime = curTime + 30;
-		
+
 		for k, v in pairs(self.cwAttrProgress) do
 			local attributeTable = cwAttribute:FindByID(k);
-			
+
 			if (attributeTable) then
 				cwDatastream:Start(self, "AttributeProgress", {
 					index = attributeTable.index, amount = v
 				});
 			end;
 		end;
-		
+
 		if (self.cwAttrProgress) then
 			self.cwAttrProgress = {};
 		end;
@@ -347,7 +336,7 @@ function playerMeta:HandleAttributeBoosts(curTime)
 					self:BoostAttribute(k2, k, false);
 				else
 					local timeLeft = v2.endTime - curTime;
-					
+
 					if (timeLeft >= 0) then
 						if (v2.default < 0) then
 							v2.amount = math.min((v2.default / v2.duration) * timeLeft, 0);
@@ -393,11 +382,11 @@ end;
 -- A function to update whether a player's weapon has fired.
 function playerMeta:UpdateWeaponFired()
 	local activeWeapon = self:GetActiveWeapon();
-	
+
 	if (IsValid(activeWeapon)) then
 		if (self.cwClipOneInfo.weapon == activeWeapon) then
 			local clipOne = activeWeapon:Clip1();
-			
+
 			if (clipOne < self.cwClipOneInfo.ammo) then
 				self.cwClipOneInfo.ammo = clipOne;
 				cwPlugin:Call("PlayerFireWeapon", self, activeWeapon, CLIP_ONE, activeWeapon:GetPrimaryAmmoType());
@@ -406,10 +395,10 @@ function playerMeta:UpdateWeaponFired()
 			self.cwClipOneInfo.weapon = activeWeapon;
 			self.cwClipOneInfo.ammo = activeWeapon:Clip1();
 		end;
-		
+
 		if (self.cwClipTwoInfo.weapon == activeWeapon) then
 			local clipTwo = activeWeapon:Clip2();
-			
+
 			if (clipTwo < self.cwClipTwoInfo.ammo) then
 				self.cwClipTwoInfo.ammo = clipTwo;
 				cwPlugin:Call("PlayerFireWeapon", self, activeWeapon, CLIP_TWO, activeWeapon:GetSecondaryAmmoType());
@@ -486,7 +475,7 @@ function playerMeta:Kick(reason)
 	if (!self:IsKicked()) then
 		timer.Simple(FrameTime() * 0.5, function()
 			local isKicked = self:IsKicked();
-			
+
 			if (IsValid(self) and isKicked) then
 				if (self:HasSpawned()) then
 					game.ConsoleCommand("kickid "..self:UserID().." "..isKicked.."\n");
@@ -497,7 +486,7 @@ function playerMeta:Kick(reason)
 			end;
 		end);
 	end;
-	
+
 	if (!reason) then
 		self.isKicked = "You have been kicked.";
 	else
@@ -564,7 +553,7 @@ function playerMeta:GetCharacter() return cwPly:GetCharacter(self); end;
 
 -- A function to get a player's storage table.
 function playerMeta:GetStorageTable() return cwStorage:GetTable(self); end;
- 
+
 -- A function to get a player's ragdoll table.
 function playerMeta:GetRagdollTable() return cwPly:GetRagdollTable(self); end;
 
@@ -585,7 +574,7 @@ end;
 -- A function to get whether a player's ragdoll has a weapon.
 function playerMeta:RagdollHasWeapon(weaponClass)
 	local ragdollWeapons = self:GetRagdollWeapons();
-	
+
 	if (ragdollWeapons) then
 		for k, v in pairs(ragdollWeapons) do
 			if (v.weaponData["class"] == weaponClass) then
@@ -603,7 +592,7 @@ end;
 -- A function to get a player's maximum armor.
 function playerMeta:GetMaxArmor(armor)
 	local maxArmor = self:GetSharedVar("MaxAP");
-	
+
 	if (maxArmor > 0) then
 		return maxArmor;
 	else
@@ -619,7 +608,7 @@ end;
 -- A function to get a player's maximum health.
 function playerMeta:GetMaxHealth(health)
 	local maxHealth = self:GetSharedVar("MaxHP");
-	
+
 	if (maxHealth > 0) then
 		return maxHealth;
 	else
@@ -627,10 +616,7 @@ function playerMeta:GetMaxHealth(health)
 	end;
 end;
 
--- A function to get whether a player is viewing the starter hints.
-function playerMeta:IsViewingStarterHints()
-	return self.cwViewStartHints;
-end;
+-- Gutting: Removal of Starting Hints Check.
 
 -- A function to get a player's last hit group.
 function playerMeta:LastHitGroup()
@@ -658,7 +644,7 @@ function playerMeta:CreateAnimationStopDelay(delay)
 	cwKernel:CreateTimer("ForcedAnim"..self:UniqueID(), delay, 1, function()
 		if (IsValid(self)) then
 			local forcedAnimation = self:GetForcedAnimation();
-			
+
 			if (forcedAnimation) then
 				self:SetForcedAnimation(false);
 			end;
@@ -670,35 +656,35 @@ end;
 function playerMeta:SetForcedAnimation(animation, delay, OnAnimate, OnFinish)
 	local forcedAnimation = self:GetForcedAnimation();
 	local sequence = nil;
-	
+
 	if (!animation) then
 		self:SetSharedVar("ForceAnim", 0);
 		self.cwForcedAnimation = nil;
-		
+
 		if (forcedAnimation and forcedAnimation.OnFinish) then
 			forcedAnimation.OnFinish(self);
 		end;
-		
+
 		return false;
 	end;
-	
+
 	local bIsPermanent = (!delay or delay == 0);
 	local bShouldPlay = (!forcedAnimation or forcedAnimation.delay != 0);
-	
+
 	if (bShouldPlay) then
 		if (type(animation) == "string") then
 			sequence = self:LookupSequence(animation);
 		else
 			sequence = self:SelectWeightedSequence(animation);
 		end;
-		
+
 		self.cwForcedAnimation = {
 			animation = animation,
 			OnAnimate = OnAnimate,
 			OnFinish = OnFinish,
 			delay = delay
 		};
-		
+
 		if (bIsPermanent) then
 			cwKernel:DestroyTimer(
 				"ForcedAnim"..self:UniqueID()
@@ -706,13 +692,13 @@ function playerMeta:SetForcedAnimation(animation, delay, OnAnimate, OnFinish)
 		else
 			self:CreateAnimationStopDelay(delay);
 		end;
-		
+
 		self:SetSharedVar("ForceAnim", sequence);
-		
+
 		if (forcedAnimation and forcedAnimation.OnFinish) then
 			forcedAnimation.OnFinish(self);
 		end;
-		
+
 		return true;
 	end;
 end;
@@ -747,26 +733,26 @@ end;
 -- A function to create a player's temporary data.
 function playerMeta:CreateTempData()
 	local uniqueID = self:UniqueID();
-	
+
 	if (!Clockwork.TempPlayerData[uniqueID]) then
 		Clockwork.TempPlayerData[uniqueID] = {};
 	end;
-	
+
 	return Clockwork.TempPlayerData[uniqueID];
 end;
 
 -- A function to make a player fake pickup an entity.
 function playerMeta:FakePickup(entity)
 	local entityPosition = entity:GetPos();
-	
+
 	if (entity:IsPlayer()) then
 		entityPosition = entity:GetShootPos();
 	end;
-	
+
 	local shootPosition = self:GetShootPos();
 	local feetDistance = self:GetPos():Distance(entityPosition);
 	local armsDistance = shootPosition:Distance(entityPosition);
-	
+
 	if (feetDistance < armsDistance) then
 		self:SetForcedAnimation("pickup", 1.2);
 	else
@@ -777,7 +763,7 @@ end;
 -- A function to set a player's temporary data.
 function playerMeta:SetTempData(key, value)
 	local tempData = self:CreateTempData();
-	
+
 	if (tempData) then
 		tempData[key] = value;
 	end;
@@ -802,7 +788,7 @@ end;
 -- A function to get a player's temporary data.
 function playerMeta:GetTempData(key, default)
 	local tempData = self:CreateTempData();
-	
+
 	if (tempData and tempData[key] != nil) then
 		return tempData[key];
 	else
@@ -826,31 +812,31 @@ end;
 
 -- A function to get the maximum weight a player can carry.
 function playerMeta:GetMaxWeight()
-	local itemsList = cwInventory:GetAsItemsList(self:GetInventory()); 
+	local itemsList = cwInventory:GetAsItemsList(self:GetInventory());
 	local weight = self:GetSharedVar("InvWeight");
-	
+
 	for k, v in pairs(itemsList) do
 		local addInvWeight = v("addInvSpace");
 		if (addInvWeight) then
 			weight = weight + addInvWeight;
 		end;
 	end;
-	
+
 	return weight;
 end;
 
 -- A function to get the maximum space a player can carry.
 function playerMeta:GetMaxSpace()
-	local itemsList = cwInventory:GetAsItemsList(self:GetInventory()); 
+	local itemsList = cwInventory:GetAsItemsList(self:GetInventory());
 	local space = self:GetSharedVar("InvSpace");
-	
+
 	for k, v in pairs(itemsList) do
 		local addInvSpace = v("addInvVolume");
 		if (addInvSpace) then
 			space = space + addInvSpace;
 		end;
 	end;
-	
+
 	return space;
 end;
 
@@ -859,7 +845,7 @@ function playerMeta:CanHoldWeight(weight)
 	local inventoryWeight = cwInventory:CalculateWeight(
 		self:GetInventory()
 	);
-	
+
 	if (inventoryWeight + weight > self:GetMaxWeight()) then
 		return false;
 	else
@@ -876,7 +862,7 @@ function playerMeta:CanHoldSpace(space)
 	local inventorySpace = cwInventory:CalculateSpace(
 		self:GetInventory()
 	);
-	
+
 	if (inventorySpace + space > self:GetMaxSpace()) then
 		return false;
 	else
@@ -930,7 +916,7 @@ function playerMeta:HasItemAsWeapon(itemTable)
 			return true;
 		end;
 	end;
-	
+
 	return false;
 end;
 
@@ -962,7 +948,7 @@ end;
 -- A function to take a player's item by ID.
 function playerMeta:TakeItemByID(uniqueID, itemID)
 	local itemTable = self:GetItemInstance(uniqueID, itemID);
-	
+
 	if (itemTable) then
 		return self:TakeItem(itemTable);
 	else
@@ -985,29 +971,29 @@ function playerMeta:GiveItem(itemTable, isForced)
 	if (type(itemTable) == "string") then
 		itemTable = cwItem:CreateInstance(itemTable);
 	end;
-	
+
 	if (!itemTable or !itemTable:IsInstance()) then
 		debug.Trace();
-		
+
 		return false, {"ErrorGiveNonInstance"};
 	end;
-	
+
 	local inventory = self:GetInventory();
-	
+
 	if ((self:CanHoldWeight(itemTable("weight"))
 	and self:CanHoldSpace(itemTable("space"))) or isForced) then
 		if (itemTable.OnGiveToPlayer) then
 			itemTable:OnGiveToPlayer(self);
 		end;
-		
+
 		cwKernel:PrintLog(LOGTYPE_GENERIC, {"LogPlayerGainedItem", self:Name(), {itemTable("name")}, itemTable("itemID")});
-		
+
 		cwInventory:AddInstance(inventory, itemTable);
-		
+
 		cwDatastream:Start(self, "InvGive", cwItem:GetDefinition(itemTable, true));
-		
+
 		cwPlugin:Call("PlayerItemGiven", self, itemTable, isForced);
-		
+
 		return itemTable;
 	else
 		return false, {"YourInventoryFull"};
@@ -1020,21 +1006,21 @@ function playerMeta:TakeItem(itemTable)
 		debug.Trace();
 		return false;
 	end;
-	
+
 	local inventory = self:GetInventory();
-	
+
 	if (itemTable.OnTakeFromPlayer) then
 		itemTable:OnTakeFromPlayer(self);
 	end;
-	
+
 	cwKernel:PrintLog(LOGTYPE_GENERIC, {"LogPlayerLostItem", self:Name(), {itemTable("name")}, itemTable("itemID")});
-	
+
 	cwPlugin:Call("PlayerItemTaken", self, itemTable);
-	
+
 	cwInventory:RemoveInstance(inventory, itemTable);
-	
+
 	cwDatastream:Start(self, "InvTake", {itemTable("index"), itemTable("itemID")});
-	
+
 	return true;
 end;
 
@@ -1090,7 +1076,7 @@ function playerMeta:SetWalkSpeed(speed, setClockworkVar)
 	if (!setClockworkVar) then
 		self.cWalkSpeed = speed;
 	end;
-	
+
 	self:ClockworkSetWalkSpeed(speed);
 end;
 
@@ -1099,7 +1085,7 @@ function playerMeta:SetJumpPower(power, setClockworkVar)
 	if (!setClockworkVar) then
 		self.cwJumpPower = power;
 	end;
-	
+
 	self:ClockworkSetJumpPower(power);
 end;
 
@@ -1108,7 +1094,7 @@ function playerMeta:SetCrouchedWalkSpeed(speed, setClockworkVar)
 	if (!setClockworkVar) then
 		self.cwCrouchedSpeed = speed;
 	end;
-	
+
 	self:ClockworkSetCrouchedWalkSpeed(speed);
 end;
 
@@ -1140,12 +1126,12 @@ end;
 function playerMeta:GetCharacterData(key, default)
 	if (self:GetCharacter()) then
 		local data = self:QueryCharacter("Data");
-		
+
 		if (data[key] != nil) then
 			return data[key];
 		end;
 	end;
-	
+
 	return default;
 end;
 
@@ -1166,7 +1152,7 @@ function playerMeta:GetClothesData()
 	if (type(clothesData) != "table") then
 		clothesData = {};
 	end;
-	
+
 	return clothesData;
 end;
 
@@ -1177,20 +1163,20 @@ function playerMeta:GetAccessoryData()
 	if (type(accessoryData) != "table") then
 		accessoryData = {};
 	end;
-	
+
 	return accessoryData;
 end;
 
 -- A function to remove a player's clothes.
 function playerMeta:RemoveClothes(shouldRemoveItem)
 	self:SetClothesData(nil);
-	
+
 	if (shouldRemoveItem) then
 		local clothesItem = self:GetClothesItem();
-		
+
 		if (clothesItem) then
 			self:TakeItem(clothesItem);
-			
+
 			return clothesItem;
 		end;
 	end;
@@ -1199,7 +1185,7 @@ end;
 -- A function to get the player's clothes item.
 function playerMeta:GetClothesItem()
 	local clothesData = self:GetClothesData();
-	
+
 	if (type(clothesData) == "table") then
 		if (clothesData.itemID != nil and clothesData.uniqueID != nil) then
 			return self:FindItemByID(clothesData.uniqueID, clothesData.itemID);
@@ -1232,17 +1218,17 @@ end;
 -- A function to set a player's clothes data.
 function playerMeta:SetClothesData(itemTable)
 	local clothesItem = self:GetClothesItem();
-	
+
 	if (itemTable) then
 		local model = cwClass:GetAppropriateModel(self:Team(), self, true);
-		
+
 		if (!model) then
 			if (clothesItem and itemTable != clothesItem) then
 				clothesItem:OnChangeClothes(self, false);
 			end;
-			
+
 			itemTable:OnChangeClothes(self, true);
-			
+
 			local clothesData = self:GetClothesData();
 				clothesData.itemID = itemTable("itemID");
 				clothesData.uniqueID = itemTable("uniqueID");
@@ -1253,7 +1239,7 @@ function playerMeta:SetClothesData(itemTable)
 			clothesData.itemID = nil;
 			clothesData.uniqueID = nil;
 		self:NetworkClothesData();
-		
+
 		if (clothesItem) then
 			clothesItem:OnChangeClothes(self, false);
 		end;

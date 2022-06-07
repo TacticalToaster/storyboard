@@ -1,4 +1,4 @@
---[[ 
+--[[
     © CloudSixteen.com do not share, re-distribute or modify
     without permission of its author (kurozael@gmail.com).
 
@@ -10,19 +10,19 @@ local THEME = Clockwork.theme:New("Clockwork");
 
 -- Called when fonts should be created.
 function THEME:CreateFonts()
-	Clockwork.fonts:Add("cwMainText", 
+	Clockwork.fonts:Add("cwMainText",
 	{
 		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 700
 	});
-	Clockwork.fonts:Add("cwESPText", 
+	Clockwork.fonts:Add("cwESPText",
 	{
 		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(5.5),
 		weight		= 700
 	});
-	Clockwork.fonts:Add("cwTooltip", 
+	Clockwork.fonts:Add("cwTooltip",
 	{
 		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(5),
@@ -125,9 +125,9 @@ function THEME:Initialize()
 	Clockwork.option:SetKey("icon_data_directory", {path = "", size = nil});
 	Clockwork.option:SetKey("icon_data_attributes", {path = "", size = nil});
 	Clockwork.option:SetKey("icon_data_business", {path = "", size = nil});
-	
+
 	Clockwork.option:SetKey("top_bar_width_scale", 0.3);
-	
+
 	Clockwork.option:SetKey("info_text_icon_size", 20);
 	Clockwork.option:SetKey("info_text_red_icon", "icon16/exclamation.png");
 	Clockwork.option:SetKey("info_text_green_icon", "icon16/tick.png");
@@ -135,26 +135,26 @@ function THEME:Initialize()
 	Clockwork.option:SetKey("info_text_blue_icon", "icon16/information.png");
 
 	Clockwork.option:SetKey("gradient", "gui/gradient_up");
-	
+
 	Clockwork.option:SetColor("columnsheet_shadow_normal", Color(0, 0, 0, 255));
 	Clockwork.option:SetColor("columnsheet_text_normal", Color(255, 255, 255, 255));
 	Clockwork.option:SetColor("columnsheet_shadow_active", Color(255, 255, 255, 255));
 	Clockwork.option:SetColor("columnsheet_text_active", Color(50, 50, 50, 255));
-	
+
 	Clockwork.option:SetColor("basic_form_highlight", Color(0, 0, 0, 255));
 	Clockwork.option:SetColor("basic_form_color", Color(0, 0, 0, 255));
-	
+
 	Clockwork.option:SetColor("scoreboard_name", Color(0, 0, 0, 255));
 	Clockwork.option:SetColor("scoreboard_desc", Color(0, 0, 0, 255));
 	Clockwork.option:SetColor("scoreboard_item_background", Color(255, 255, 255, 255));
-	
+
 	Clockwork.option:SetColor("positive_hint", Color(100, 175, 100, 255));
 	Clockwork.option:SetColor("negative_hint", Color(175, 100, 100, 255));
 	Clockwork.option:SetColor("background", Color(0, 0, 0, 125));
 	Clockwork.option:SetColor("foreground", Color(50, 50, 50, 125));
 	Clockwork.option:SetColor("target_id", Color(50, 75, 100, 255));
 	Clockwork.option:SetColor("white", Color(255, 255, 255, 255));
-	
+
 	Clockwork.option:SetFont("schema_description", "cwMainText");
 	Clockwork.option:SetFont("scoreboard_desc", "cwScoreboardDesc");
 	Clockwork.option:SetFont("scoreboard_name", "cwScoreboardName");
@@ -175,16 +175,16 @@ function THEME:Initialize()
 	Clockwork.option:SetFont("menu_text_big", "cwMenuTextBig");
 	Clockwork.option:SetFont("chat_box_text", "cwMainText");
 	Clockwork.option:SetFont("large_3d_2d", "cwLarge3D2D");
-	Clockwork.option:SetFont("hints_text", "cwIntroTextTiny");
+	-- Gutting: Removal of Hint Set Font
 	Clockwork.option:SetFont("main_text", "cwMainText");
 	Clockwork.option:SetFont("bar_text", "cwMainText");
 	Clockwork.option:SetFont("esp_text", "cwESPText");
-	
+
 	Clockwork.option:SetSound("click_release", "ui/buttonclickrelease.wav");
 	Clockwork.option:SetSound("rollover", "ui/buttonrollover.wav");
 	Clockwork.option:SetSound("click", "ui/buttonclick.wav");
 	Clockwork.option:SetSound("tick", "common/talk.wav");
-	
+
 	SMALL_BAR_BG = Clockwork.render:AddSlice9("SmallBox", "clockwork/sliced/smallbox", 6);
 	SMALL_BAR_FG = Clockwork.render:AddSlice9("SmallBox", "clockwork/sliced/smallbox", 6);
 	INFOTEXT_SLICED = Clockwork.render:AddSlice9("SmallBox", "clockwork/sliced/smallbox", 6);
@@ -199,7 +199,7 @@ function THEME:Initialize()
 	SLICED_INFO_MENU_BG = Clockwork.render:AddSlice9("BigBox", "clockwork/sliced/bigbox", 28);
 	CUSTOM_BUSINESS_ITEM_BG = Clockwork.render:AddSlice9("BigBox", "clockwork/sliced/bigbox", 28);
 	SLICED_COLUMNSHEET_BUTTON = Clockwork.render:AddSlice9("SmallBox", "clockwork/sliced/smallbox", 6);
-	
+
 	Clockwork.bars.height = 12;
 	Clockwork.bars.padding = 14;
 end;

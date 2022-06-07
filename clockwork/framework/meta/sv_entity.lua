@@ -1,5 +1,5 @@
 --[[
-	© CloudSixteen.com do not share, re-distribute or modify
+	ï¿½ CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 
 	Clockwork was created by Conna Wiles (also known as kurozael.)
@@ -21,7 +21,6 @@ local cwDatabase = Clockwork.database;
 local cwDatastream = Clockwork.datastream;
 local cwFaction = Clockwork.faction;
 local cwInventory = Clockwork.inventory;
-local cwHint = Clockwork.hint;
 local cwCommand = Clockwork.command;
 local cwClass = Clockwork.class;
 local cwVoice = Clockwork.voice;
@@ -45,7 +44,7 @@ function entityMeta:FireBullets(bulletInfo)
 	if (self:IsPlayer()) then
 		cwPlugin:Call("PlayerAdjustBulletInfo", self, bulletInfo);
 	end;
-	
+
 	cwPlugin:Call("EntityFireBullets", self, bulletInfo);
 	return self:ClockworkFireBullets(bulletInfo);
 end;
@@ -53,10 +52,10 @@ end;
 -- A function to set an entity's skin.
 function entityMeta:SetSkin(skin)
 	self:ClockworkSetSkin(skin);
-	
+
 	if (self:IsPlayer()) then
 		cwPlugin:Call("PlayerSkinChanged", self, skin);
-		
+
 		if (self:IsRagdolled()) then
 			self:GetRagdollTable().skin = skin;
 		end;
@@ -66,10 +65,10 @@ end;
 -- A function to set an entity's model.
 function entityMeta:SetModel(model)
 	self:ClockworkSetModel(model or "models/roller.mdl");
-	
+
 	if (self:IsPlayer()) then
 		cwPlugin:Call("PlayerModelChanged", self, model);
-		
+
 		if (self:IsRagdolled()) then
 			self:GetRagdollTable().model = model;
 		end;
@@ -101,7 +100,7 @@ function entityMeta:EmitHitSound(sound)
 	self:EmitSound("weapons/crossbow/hitbod2.wav",
 		math.random(100, 150), math.random(150, 170)
 	);
-	
+
 	timer.Simple(FrameTime(), function()
 		if (IsValid(self)) then
 			self:EmitSound(sound);
@@ -114,7 +113,7 @@ function entityMeta:SetMaterial(material)
 	if (self:IsPlayer() and self:IsRagdolled()) then
 		self:GetRagdollEntity():SetMaterial(material);
 	end;
-	
+
 	self:ClockworkSetMaterial(material);
 end;
 
@@ -123,7 +122,7 @@ function entityMeta:SetColor(color)
 	if (self:IsPlayer() and self:IsRagdolled()) then
 		self:GetRagdollEntity():SetColor(color);
 	end;
-	
+
 	self:ClockworkSetColor(color);
 end;
 

@@ -1,4 +1,4 @@
---[[ 
+--[[
 	© CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 
@@ -20,7 +20,7 @@ else
 	CurrentGM = Clockwork;
 	table.Merge(CurrentGM, GM);
 	Clockwork = nil;
-	
+
 	Clockwork = GM;
 	table.Merge(Clockwork, CurrentGM);
 	CurrentGM = nil;
@@ -100,11 +100,11 @@ function Clockwork:ClockworkAddSharedVars(globalVars, playerVars)
 	for k, v in pairs(self.player.characterData) do
 		playerVars:Add(k, v.nwType, v.playerOnly);
 	end;
-	
+
 	for k, v in pairs(self.player.playerData) do
 		playerVars:Add(k, v.nwType, v.playerOnly);
 	end;
-	
+
 	playerVars:Number("InvWeight", true);
 	playerVars:Number("InvSpace", true);
 	playerVars:Number("MaxHP");
@@ -121,7 +121,7 @@ function Clockwork:ClockworkAddSharedVars(globalVars, playerVars)
 	playerVars:Bool("CharBanned", true);
 	playerVars:Bool("IsWepRaised");
 	playerVars:Bool("Initialized");
-	playerVars:Bool("IsJogMode");
+	-- Gutting: Removed the playerVars for IsJogMode or whatever
 	playerVars:Bool("IsRunMode");
 	playerVars:Bool("IsSearching", true)
 	playerVars:String("Clothes", true);

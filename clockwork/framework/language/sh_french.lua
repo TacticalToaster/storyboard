@@ -648,8 +648,7 @@ CW_FRENCH["EnableSpaceSystem"] = "Activer le système d'espace";
 CW_FRENCH["EnableSpaceSystemDesc"] = "Utiliser ou non le système d'espace qui affecte l'inventaire'.";
 CW_FRENCH["DrawIntroBars"] = "Afficher les barres d'introduction";
 CW_FRENCH["DrawIntroBarsDesc"] = "Afficher ou non les barres d'introduction.";
-CW_FRENCH["EnableJogging"] = "Activer le jogging";
-CW_FRENCH["EnableJoggingDesc"] = "Possibilité ou non d'activer le jogging.";
+-- Gutting: Removing language stuff for jogging.
 CW_FRENCH["EnableLOOCIcons"] = "Activer les icônes LOOC";
 CW_FRENCH["EnableLOOCIconsDesc"] = "Possibilité ou non d'activer les icônes de chat LOOC.";
 CW_FRENCH["ShowBusinessMenu"] = "Afficher le menu Business";

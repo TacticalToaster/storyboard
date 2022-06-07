@@ -4,7 +4,7 @@
 
 	Clockwork was created by Conna Wiles (also known as kurozael.)
 	http://cloudsixteen.com/license/clockwork.html
-	
+
 	Translated by Tensa.
 --]]
 
@@ -656,8 +656,7 @@ CW_KOREAN["EnableSpaceSystem"] = "공간 시스템 활성화";
 CW_KOREAN["EnableSpaceSystemDesc"] = "인벤토리의 공간 시스템을 사용할지에 대한 여부입니다.";
 CW_KOREAN["DrawIntroBars"] = "인트로 바 표시";
 CW_KOREAN["DrawIntroBarsDesc"] = "인트로 시 화면 상하단에 검은 바를 그릴지에 대한 여부입니다.";
-CW_KOREAN["EnableJogging"] = "조깅 활성화";
-CW_KOREAN["EnableJoggingDesc"] = "조깅을 사용할지에 대한 여부입니다.";
+-- Gutting: Removing language stuff for jogging.
 CW_KOREAN["EnableLOOCIcons"] = "LOOC 아이콘 활성화";
 CW_KOREAN["EnableLOOCIconsDesc"] = "LOOC 채팅에 아이콘을 사용할지에 대한 여부입니다.";
 CW_KOREAN["ShowBusinessMenu"] = "상업 메뉴 활성화";

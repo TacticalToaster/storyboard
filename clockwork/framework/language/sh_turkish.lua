@@ -648,8 +648,7 @@ CW_TURKISH["EnableSpaceSystem"] = "Alan Sistemini Etkinleştir";
 CW_TURKISH["EnableSpaceSystemDesc"] = "Stokları etkileyen alan sistemini envanterde kullanıp kullanmamak.";
 CW_TURKISH["DrawIntroBars"] = "Giriş Çubuklarını Çiz";
 CW_TURKISH["DrawIntroBarsDesc"] = "Ekranın üstüne ve altına giriş için sinematik siyah çubuklar çizilip çizilmeyeceği.";
-CW_TURKISH["EnableJogging"] = "Tempolu Koşuyu Etkinleştir";
-CW_TURKISH["EnableJoggingDesc"] = "Tempolu koşu yapmayı etkinleştir.";
+-- Gutting: Removing language stuff for jogging.
 CW_TURKISH["EnableLOOCIcons"] = "LOOC Simgelerini Etkinleştir";
 CW_TURKISH["EnableLOOCIconsDesc"] = "LOOC sohbet simgelerinin etkinleştirilip etkinleştirilmeyeceği.";
 CW_TURKISH["ShowBusinessMenu"] = "İşletme Menüsünü Göster";

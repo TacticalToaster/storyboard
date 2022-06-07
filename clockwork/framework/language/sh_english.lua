@@ -465,8 +465,7 @@ CW_ENGLISH["EnableTwelveHourClock"] = "Enable Twelve Hour Clock";
 CW_ENGLISH["EnableTwelveHourClockDesc"] = "Whether or not to show a twelve hour clock.";
 CW_ENGLISH["ShowTopBars"] = "Show Top Bars";
 CW_ENGLISH["ShowTopBarsDesc"] = "Whether or not to show bars at the top of the screen.";
-CW_ENGLISH["EnableHintsSystem"] = "Enable Hints System";
-CW_ENGLISH["EnableHintsSystemDesc"] = "Whether or not to show you any hints.";
+-- Gutting: Removal of Hint Options
 CW_ENGLISH["EnableVignette"] = "Enable Vignette";
 CW_ENGLISH["EnableVignetteDesc"] = "Whether or not to draw the vignette.";
 CW_ENGLISH["ShowMessageTimeStamps"] = "Show Message Time Stamps";
@@ -615,8 +614,7 @@ CW_ENGLISH["StartingFlags"] = "Starting Flags";
 CW_ENGLISH["StartingFlagsDesc"] = "The flags that each player begins with.";
 CW_ENGLISH["PlayerSprayEnabled"] = "Player Spray Enabled";
 CW_ENGLISH["PlayerSprayEnabledDesc"] = "Whether players can spray their tags.";
-CW_ENGLISH["HintInterval"] = "Hint Interval";
-CW_ENGLISH["HintIntervalDesc"] = "The time that a hint is displayed to each player (seconds).";
+-- Gutting: Removal of Hint Language Stuff
 CW_ENGLISH["OutOfCharacterChatInterval"] = "Out-Of-Character Chat Interval";
 CW_ENGLISH["OutOfCharacterChatIntervalDesc"] = "The time that a player has to wait to speak out-of-character again (seconds).\nSet to 0 for never.";
 CW_ENGLISH["MinuteTime"] = "Minute Time";
@@ -655,8 +653,7 @@ CW_ENGLISH["EnableSpaceSystem"] = "Enable Space System";
 CW_ENGLISH["EnableSpaceSystemDesc"] = "Whether or not to use the space system that affects inventories.";
 CW_ENGLISH["DrawIntroBars"] = "Draw Intro Bars";
 CW_ENGLISH["DrawIntroBarsDesc"] = "Whether or not to draw cinematic intro black bars on top and bottom of the screen.";
-CW_ENGLISH["EnableJogging"] = "Enable Jogging";
-CW_ENGLISH["EnableJoggingDesc"] = "Whether or not to enable jogging.";
+-- Gutting: Removing language stuff for jogging.
 CW_ENGLISH["EnableLOOCIcons"] = "Enable LOOC Icons";
 CW_ENGLISH["EnableLOOCIconsDesc"] = "Whether or not to enable LOOC chat icons.";
 CW_ENGLISH["ShowBusinessMenu"] = "Show Business Menu";
@@ -696,19 +693,7 @@ CW_ENGLISH["CraftingNameDesc"] = "The name of the button to open the crafting me
 CW_ENGLISH["MaxCharName"] = "Character Name Limit";
 CW_ENGLISH["MaxCharNameDesc"] = "The maximum amount of characters someone can use in their name.";
 
-CW_ENGLISH["HintOOC"] = "Type // before your message to talk out-of-character.";
-CW_ENGLISH["HintLOOC"] = "Type .// or [[before your message to talk out-of-character locally.";
-CW_ENGLISH["HintDucking"] = "Toggle ducking by holding :+speed: and pressing :+walk: while standing still.";
-CW_ENGLISH["HintJogging"] = "Toggle jogging by pressing :+walk: while moving.";
-CW_ENGLISH["HintDirectory"] = "Hold down :+showscores: and click *name_directory* to get help.";
-CW_ENGLISH["HintHotkeyF1"] = "Hold :gm_showhelp: to view your character and roleplay information.";
-CW_ENGLISH["HintHotkeyF2"] = "Press :gm_showteam: while looking at a door to view the door menu.";
-CW_ENGLISH["HintHotkeyTab"] = "Press :+showscores: to view the main menu, or hold :+showscores: to temporarily view it.";
-CW_ENGLISH["HintContextMenu"] = "Hold :+menu_context: and click on an entity to open its menu.";
-CW_ENGLISH["HintEntityMenu"] = "Press :+use: on an entity to open its menu.";
-CW_ENGLISH["HintPhysDesc"] = "Change your character's physical description by typing $command_prefix$CharPhysDesc.";
-CW_ENGLISH["HintGiveName"] = "Press :gm_showteam: to allow characters within a specific range to recognise you.";
-CW_ENGLISH["HintTargetRecognises"] = "A character's name will flash white if they do not recognise you.";
+-- Gutting: Removal of Hint Language Stuff
 
 CW_ENGLISH["YouHaveNotCompletedThe"] = "You have not completed the #3!";
 CW_ENGLISH["MenuQuizTitle"] = "Entry Exam";
@@ -870,7 +855,7 @@ CW_ENGLISH["CraftErrorNotAllowed"] = "You do not have the required access to thi
 CW_ENGLISH["YouCannotAffordToDoThat"] = "You cannot afford to do that!";
 CW_ENGLISH["MissingItemRequirements"] = "You are missing some requirements!";
 
-CW_ENGLISH["HintRaiseWeapon"] = "Hold :+reload: to raise or lower your weapon.";
+-- Gutting: Removal of Hint Language Stuff
 
 CW_ENGLISH["Equip"] = "Equip";
 CW_ENGLISH["Holster"] = "Holster";

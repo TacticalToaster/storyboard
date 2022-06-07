@@ -58,7 +58,7 @@ local cwDatabase = Clockwork.database;
 local cwDatastream = Clockwork.datastream;
 local cwFaction = Clockwork.faction;
 local cwInventory = Clockwork.inventory;
-local cwHint = Clockwork.hint;
+-- Gutting: Removal of hints localization. Fuck Hints
 local cwCommand = Clockwork.command;
 local cwClass = Clockwork.class;
 local cwQuiz = Clockwork.quiz;
@@ -280,7 +280,7 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 
 	player:SetSharedVar("InvWeight", math.ceil(infoTable.inventoryWeight));
 	player:SetSharedVar("InvSpace", math.ceil(infoTable.inventorySpace));
-	player:SetSharedVar("Wages", math.ceil(infoTable.wages));
+	-- Gutting: Gutting wages, removed shared var.
 
 	if (cwEvent:CanRun("limb_damage", "disability")) then
 		local leftLeg = cwLimb:GetDamage(player, HITGROUP_LEFTLEG, true);
@@ -297,9 +297,7 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 		infoTable.runSpeed = infoTable.runSpeed * 0.5;
 	end;
 
-	if (infoTable.isJogging) then
-		infoTable.walkSpeed = infoTable.walkSpeed * 1.75;
-	end;
+	-- Gutting: Removed player infotable stuff for jogging, it's being gutted.
 
 	if (infoTable.runSpeed < infoTable.walkSpeed) then
 		infoTable.runSpeed = infoTable.walkSpeed;
@@ -4097,40 +4095,7 @@ function Clockwork:PlayerCharacterInitialized(player)
 		player.cwAttrProgress[k] = math.floor(v.progress);
 	end;
 
-	local startHintsDelay = 4;
-	local starterHintsTable = {
-		"Directory",
-		"GiveName",
-		"TargetRecognises",
-		"RaiseWeapon"
-	};
-
-	for k, v in pairs(starterHintsTable) do
-		local hintTable = self.hint:Find(v);
-
-		if (hintTable and !player:GetData("Hint"..k)) then
-			if (!hintTable.Callback or hintTable.Callback(player) != false) then
-				timer.Simple(startHintsDelay, function()
-					if (IsValid(player)) then
-						self.hint:Send(player, hintTable.text, 30);
-						player:SetData("Hint"..k, true);
-					end;
-				end);
-
-				startHintsDelay = startHintsDelay + 30;
-			end;
-		end;
-	end;
-
-	if (startHintsDelay > 4) then
-		player.cwViewStartHints = true;
-
-		timer.Simple(startHintsDelay, function()
-			if (IsValid(player)) then
-				player.cwViewStartHints = false;
-			end;
-		end);
-	end;
+	-- Gutting: Removal of more hints timers.
 
 	timer.Simple(FrameTime() * 0.5, function()
 		self.inventory:SendUpdateAll(player);
@@ -4156,7 +4121,7 @@ function Clockwork:PlayerCharacterInitialized(player)
 	if (rankTable and rankTable.class and cwClass:GetAll()[rankTable.class]) then
 		cwClass:Set(player, rankTable.class);
 	end;
-	
+
 	cwPlugin:Call("PostPlayerCharacterInitialized", player);
 end;
 
@@ -4674,7 +4639,7 @@ function Clockwork:DoPlayerDeath(player, attacker, damageInfo)
 			end;
 		end);
 	end;
-	
+
 	if (cwPlugin:Call("PlayerCanDeathStripAmmo", player, attacker, damageInfo)) then
 		player:SetCharacterData("Ammo", {}, true);
 		player:StripAmmo();
@@ -5042,7 +5007,7 @@ function Clockwork:EntityTakeDamage(entity, damageInfo)
 
 				if (damageInfo:GetDamage() > 0) then
 					cwKernel:CalculatePlayerDamage(player, lastHitGroup, damageInfo);
-					
+
 					if (cwPlugin:Call("PlayerCanTakeKnockbackFromDamage", entity, damageInfo)) then
 						player:SetVelocity(cwKernel:ConvertForce(damageInfo:GetDamageForce() * 32, 200));
 					end;
@@ -5253,13 +5218,8 @@ function Clockwork:KeyPress(player, key)
 	elseif (key == IN_WALK) then
 		local velocity = player:GetVelocity():Length();
 
-		if (velocity > 0 and !player:KeyDown(IN_SPEED)) then
-			if (player:GetSharedVar("IsJogMode") or !cwConfig:Get("enable_jogging"):Get()) then
-				player:SetSharedVar("IsJogMode", false);
-			else
-				player:SetSharedVar("IsJogMode", true);
-			end;
-		elseif (velocity == 0 and player:KeyDown(IN_SPEED)) then
+		-- Gutting: Gutted velocity check for jogging
+		if (velocity == 0 and player:KeyDown(IN_SPEED)) then
 			if (player:Crouching()) then
 				player:RunCommand("-duck");
 			else
@@ -5334,8 +5294,6 @@ end;
 
 -- Called when clockwork has been reloaded by auto refresh.
 function Clockwork:OnClockworkReloaded()
-	print("ACODFJL server")
-
 	local username = cwConfig:Get("mysql_username"):Get();
 	local password = cwConfig:Get("mysql_password"):Get();
 	local database = cwConfig:Get("mysql_database"):Get();
@@ -5850,26 +5808,26 @@ end;
 
 function ClockworkPlayerSay(player, text)
 	CLOCKWORK_PLAYERSAY_OVERRIDE = true;
-	
+
 	text = hook.Call("PlayerSay", Clockwork, player, text, true);
-	
+
 	CLOCKWORK_PLAYERSAY_OVERRIDE = nil;
-	
+
 	if (text == "") then
 		return;
 	end;
-	
+
 	local maxChatLength = Clockwork.config:Get("max_chat_length"):Get();
 	local prefix = Clockwork.config:Get("command_prefix"):Get();
 	local curTime = CurTime();
-	
+
 	if (string.len(text) >= maxChatLength) then
 		text = string.sub(text, 0, maxChatLength);
 	end;
-	
+
 	if (string.sub(text, 1, 2) == "//") then
 		text = string.Trim(string.sub(text, 3));
-	
+
 		if (text != "") then
 			if (Clockwork.plugin:Call("PlayerCanSayOOC", player, text)) then
 				if (!player.cwNextTalkOOC or curTime > player.cwNextTalkOOC or player:IsAdmin()) then
@@ -5880,7 +5838,7 @@ function ClockworkPlayerSay(player, text)
 					Clockwork.player:Notify(
 						player, "You cannot cannot talk out-of-character for another "..math.ceil(player.cwNextTalkOOC - CurTime()).." second(s)!"
 					);
-	
+
 					return;
 				end;
 			end;
@@ -5891,7 +5849,7 @@ function ClockworkPlayerSay(player, text)
 		else
 			text = string.Trim(string.sub(text, 3));
 		end;
-	
+
 		if (text != "") then
 			if (Clockwork.plugin:Call("PlayerCanSayLOOC", player, text)) then
 				Clockwork.kernel:ServerLog("[LOOC] "..player:Name()..": "..text);
@@ -5902,11 +5860,11 @@ function ClockworkPlayerSay(player, text)
 		local prefixLength = string.len(prefix);
 		local arguments = Clockwork.kernel:ExplodeByTags(text, " ", "\"", "\"", true);
 		local command = string.sub(arguments[1], prefixLength + 1);
-	
+
 		if (Clockwork.command.stored[command] and Clockwork.command.stored[command].arguments < 2
 			and !Clockwork.command.stored[command].optionalArguments) then
 			text = string.sub(text, string.len(command) + prefixLength + 2);
-	
+
 			if (text != "") then
 				arguments = {command, text};
 			else
@@ -5915,16 +5873,16 @@ function ClockworkPlayerSay(player, text)
 		else
 			arguments[1] = command;
 		end;
-	
+
 		Clockwork.command:ConsoleCommand(player, "cwCmd", arguments);
 	elseif (Clockwork.plugin:Call("PlayerCanSayIC", player, text)) then
 		Clockwork.chatBox:AddInRadius(player, "ic", text, player:GetPos(), Clockwork.config:Get("talk_radius"):Get());
-	
+
 		if (Clockwork.player:GetDeathCode(player, true)) then
 			Clockwork.player:UseDeathCode(player, nil, {text});
 		end;
 	end;
-	
+
 	if (Clockwork.player:GetDeathCode(player)) then
 		Clockwork.player:TakeDeathCode(player);
 	end;
@@ -5961,13 +5919,13 @@ function playerMeta:SetCharacterData(key, value, bFromBase)
 
 		if (character[key] ~= nil) then
 			local oldValue = character[key];
-			
+
 			character[key] = value;
 			Clockwork.plugin:Call("PlayerCharacterDataChanged", self, key, oldValue, value);
 		end;
 	else
 		local oldValue = character.data[key];
-		
+
 		character.data[key] = value;
 
 		if (value ~= oldValue) then
@@ -5980,7 +5938,7 @@ end;
 function playerMeta:SetData(key, value)
 	if (self.cwData) then
 		local oldValue = self.cwData[key];
-		
+
 		self.cwData[key] = value;
 
 		if (value ~= oldValue) then

@@ -255,10 +255,10 @@ function Clockwork.setting:AddSettings()
 
 		Clockwork.setting:AddCheckBox(categoryFramework, "EnableTwelveHourClock", "cwTwelveHourClock", "EnableTwelveHourClockDesc");
 		Clockwork.setting:AddCheckBox(categoryFramework, "ShowTopBars", "cwTopBars", "ShowTopBarsDesc");
-		Clockwork.setting:AddCheckBox(categoryFramework, "EnableHintsSystem", "cwShowHints", "EnableHintsSystemDesc");
+		-- Gutting: Removal of Hint Check Box
 		Clockwork.setting:AddMultiChoice(categoryFramework, "Language", "cwLang", langTable, "LangDesc");
 		Clockwork.setting:AddCheckBox(categoryFramework, "EnableVignette", "cwShowVignette", "EnableVignetteDesc");
-		
+
 		Clockwork.setting:AddCheckBox(categoryChatBox, "ShowMessageTimeStamps", "cwShowTimeStamps", "ShowMessageTimeStampsDesc");
 		Clockwork.setting:AddCheckBox(categoryChatBox, "ShowClockworkMessages", "cwShowClockwork", "ShowClockworkMessagesDesc");
 		Clockwork.setting:AddCheckBox(categoryChatBox, "ShowServerMessages", "cwShowServer", "ShowServerMessagesDesc");
@@ -268,12 +268,12 @@ function Clockwork.setting:AddSettings()
 		Clockwork.setting:AddMultiChoice(categoryTheme, categoryTheme, "cwActiveTheme", themeTable, "ThemeDesc", function ()
 			return (Clockwork.config:Get("modify_themes"):GetBoolean());
 		end);
-		
+
 		--[[
 		Clockwork.setting:AddColorMixer(categoryTheme, "Text Color:", "cwTextColor", "The Text Color", function()
 			return (!Clockwork.theme:IsFixed());
 		end);
-		
+
 		Clockwork.setting:AddColorMixer(categoryTheme, "Background Color:", "cwBackColor", "The Background Color");
 		Clockwork.setting:AddNumberSlider(categoryTheme, "TabMenu X-Axis:", "cwTabPosX", 0, ScrW(), 0, "The position of the tab menu on the X axis.");
 		Clockwork.setting:AddNumberSlider(categoryTheme, "TabMenu Y-Axis:", "cwTabPosY", 0, ScrH(), 0, "The position of the tab menu on the Y axis.");
@@ -286,7 +286,7 @@ function Clockwork.setting:AddSettings()
 		Clockwork.setting:AddCheckBox(categoryTheme, "Show Gradient:", "cwShowGradient", "Whether or not to show a gradient background.");
 		Clockwork.setting:AddTextEntry(categoryTheme, "Material:", "cwMaterial", "The material to be used for the tab menu.");
 		--]]
-		
+
 		Clockwork.setting:AddCheckBox(categoryAdminESP, "EnableAdminESP", "cwAdminESP", "EnableAdminESPDesc", function()
 			return Clockwork.player:IsAdmin(Clockwork.Client);
 		end);
