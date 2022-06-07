@@ -2679,7 +2679,7 @@ function Clockwork:PlayerCanDropWeapon(player, itemTable, weapon, bNoMsg)
 	else
 		return true;
 	end;
-end; //test
+end;
 
 --[[
 	@codebase Server
