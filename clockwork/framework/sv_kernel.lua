@@ -264,24 +264,29 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 		infoTable.wages = 0;
 	end;
 
+	// TODO: Timer create/delete hook this
 	if (player.cwReloadHoldTime and curTime >= player.cwReloadHoldTime) then
 		cwPly:ToggleWeaponRaised(player);
 		player.cwReloadHoldTime = nil;
 		player.cwNextShootTime = curTime + cwConfig:Get("shoot_after_raise_time"):Get();
 	end;
 
+	// TODO: Should only need to do on ragdoll
 	if (player:IsRagdolled()) then
 		player:SetMoveType(MOVETYPE_OBSERVER);
 	end;
 
+	// TODO: Timer this
 	if (storageTable and cwPlugin:Call("PlayerStorageShouldClose", player, storageTable)) then
 		cwStorage:Close(player);
 	end;
 
+	// TODO: Shouldn't have to constantly update this, make modifying anything in the infoTables done through a method that updates stuff
 	player:SetSharedVar("InvWeight", math.ceil(infoTable.inventoryWeight));
 	player:SetSharedVar("InvSpace", math.ceil(infoTable.inventorySpace));
 	-- Gutting: Gutting wages, removed shared var.
 
+	// TODO: Put in damage hook
 	if (cwEvent:CanRun("limb_damage", "disability")) then
 		local leftLeg = cwLimb:GetDamage(player, HITGROUP_LEFTLEG, true);
 		local rightLeg = cwLimb:GetDamage(player, HITGROUP_RIGHTLEG, true);
@@ -293,27 +298,33 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 		end;
 	end;
 
+	// TODO: Either do this in a custom move system/hook or something else, this is shitty
 	if (player:KeyDown(IN_BACK)) then
 		infoTable.runSpeed = infoTable.runSpeed * 0.5;
 	end;
 
 	-- Gutting: Removed player infotable stuff for jogging, it's being gutted.
 
+	// TODO: Can also just do this in the custom move system/hook
 	if (infoTable.runSpeed < infoTable.walkSpeed) then
 		infoTable.runSpeed = infoTable.walkSpeed;
 	end;
 
+	// TODO: Try to see if I can make these not in timers/think hooks
 	--[[ Update whether the weapon has fired, or is being raised. --]]
 	player:UpdateWeaponFired();
 	player:UpdateWeaponRaised();
 
+	// TODO: Put in moving hook on sprinting
 	player:SetSharedVar("IsRunMode", infoTable.isRunning);
 
+	// TODO: Redo infoTable system completely to be based on ran hooks rather than think hooks and timers
 	player:SetCrouchedWalkSpeed(math.max(infoTable.crouchedSpeed, 0), true);
 	player:SetWalkSpeed(math.max(infoTable.walkSpeed, 0), true);
 	player:SetJumpPower(math.max(infoTable.jumpPower, 0), true);
 	player:SetRunSpeed(math.max(infoTable.runSpeed, 0), true);
 
+	// TODO: Make into timer or hook depending on what's possible
 	local activeWeapon = player:GetActiveWeapon();
 	local weaponItemTable = cwItem:GetByWeapon(activeWeapon);
 
@@ -330,33 +341,7 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 		end;
 	end;
 
-	if (!player:KeyDown(IN_SPEED)) then return; end;
-
-	local traceLine = player:GetEyeTraceNoCursor();
-	local velocity = player:GetVelocity():Length();
-	local entity = traceLine.Entity;
-
-	if (traceLine.HitPos:Distance(player:GetShootPos()) > math.max(48, math.min(velocity, 256))
-	or !IsValid(entity)) then
-		return;
-	end;
-
-	if (entity:GetClass() != "prop_door_rotating" or cwPly:IsNoClipping(player)) then
-		return;
-	end;
-
-	local doorPartners = cwEntity:GetDoorPartners(entity);
-
-	for k, v in pairs(doorPartners) do
-		if ((!cwEntity:IsDoorLocked(v) and cwConfig:Get("bash_in_door_enabled"):Get())
-		and (!v.cwNextBashDoor or curTime >= v.cwNextBashDoor)) then
-			cwEntity:BashInDoor(v, player);
-
-			player:ViewPunch(
-				Angle(math.Rand(-32, 32), math.Rand(-80, 80), math.Rand(-16, 16))
-			);
-		end;
-	end;
+	// Gutting door bashing, will move into an optional plugin
 end;
 
 --[[
@@ -2230,6 +2215,8 @@ end;
 	@param {Unknown} Missing description for curTime.
 	@returns {Unknown}
 --]]
+
+// TODO: Make timer
 function Clockwork:PlayerSetSharedVars(player, curTime)
 	local weaponClass = cwPly:GetWeaponClass(player);
 	local color = player:GetColor();
@@ -2240,21 +2227,21 @@ function Clockwork:PlayerSetSharedVars(player, curTime)
 
 	local clothesItem = player:IsWearingClothes();
 
+	// Maybe rework the clothing system/pull out into a plugin?
 	if (clothesItem) then
 		player:NetworkClothesData();
 	else
 		player:RemoveClothes();
 	end;
 
-	if (cwConfig:Get("health_regeneration_enabled"):Get()
-	and cwPlugin:Call("PlayerShouldHealthRegenerate", player)) then
-		cwPlugin:Call("PlayerHealthRegenerate", player, health, maxHealth)
-	end;
+	// Optimization TODO: make health regen in a timer
 
+	// TODO: WTF is this for???
 	if (color.r == 255 and color.g == 0 and color.b == 0 and color.a == 0) then
 		player:SetColor(Color(255, 255, 255, 255));
 	end;
 
+	// TODO: Move this out to a timer? Maybe there's a hook that would work?
 	for k, v in pairs(player:GetWeapons()) do
 		local ammoType = v:GetPrimaryAmmoType();
 
@@ -2263,19 +2250,7 @@ function Clockwork:PlayerSetSharedVars(player, curTime)
 		end;
 	end;
 
-	if (player.cwDrunkTab) then
-		for k, v in pairs(player.cwDrunkTab) do
-			if (curTime >= v) then
-				table.remove(player.cwDrunkTab, k);
-			end;
-		end;
-	end;
-
-	if (isDrunk) then
-		player:SetSharedVar("IsDrunk", isDrunk);
-	else
-		player:SetSharedVar("IsDrunk", 0);
-	end;
+	// Gutting Drunk stuff to optional plugin
 end;
 
 --[[
