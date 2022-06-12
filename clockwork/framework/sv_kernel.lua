@@ -259,56 +259,20 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 	local playBreathSound = false;
 	local storageTable = player:GetStorageTable();
 
-	if (!cwConfig:Get("cash_enabled"):Get()) then
-		player:SetCharacterData("Cash", 0, true);
-		infoTable.wages = 0;
-	end;
-
-	// TODO: Timer create/delete hook this
-	if (player.cwReloadHoldTime and curTime >= player.cwReloadHoldTime) then
-		cwPly:ToggleWeaponRaised(player);
-		player.cwReloadHoldTime = nil;
-		player.cwNextShootTime = curTime + cwConfig:Get("shoot_after_raise_time"):Get();
-	end;
-
-	// TODO: Should only need to do on ragdoll
-	if (player:IsRagdolled()) then
-		player:SetMoveType(MOVETYPE_OBSERVER);
-	end;
-
 	// TODO: Timer this
 	if (storageTable and cwPlugin:Call("PlayerStorageShouldClose", player, storageTable)) then
 		cwStorage:Close(player);
 	end;
 
-	// TODO: Shouldn't have to constantly update this, make modifying anything in the infoTables done through a method that updates stuff
-	player:SetSharedVar("InvWeight", math.ceil(infoTable.inventoryWeight));
-	player:SetSharedVar("InvSpace", math.ceil(infoTable.inventorySpace));
 	-- Gutting: Gutting wages, removed shared var.
 
-	// TODO: Put in damage hook
-	if (cwEvent:CanRun("limb_damage", "disability")) then
-		local leftLeg = cwLimb:GetDamage(player, HITGROUP_LEFTLEG, true);
-		local rightLeg = cwLimb:GetDamage(player, HITGROUP_RIGHTLEG, true);
-		local legDamage = math.max(leftLeg, rightLeg);
-
-		if (legDamage > 0) then
-			infoTable.runSpeed = infoTable.runSpeed / (1 + legDamage);
-			infoTable.jumpPower = infoTable.jumpPower / (1 + legDamage);
-		end;
-	end;
+	// TODO: Pulling limb system into a new plugin
 
 	// TODO: Either do this in a custom move system/hook or something else, this is shitty
-	if (player:KeyDown(IN_BACK)) then
-		infoTable.runSpeed = infoTable.runSpeed * 0.5;
-	end;
 
 	-- Gutting: Removed player infotable stuff for jogging, it's being gutted.
 
 	// TODO: Can also just do this in the custom move system/hook
-	if (infoTable.runSpeed < infoTable.walkSpeed) then
-		infoTable.runSpeed = infoTable.walkSpeed;
-	end;
 
 	// TODO: Try to see if I can make these not in timers/think hooks
 	--[[ Update whether the weapon has fired, or is being raised. --]]
@@ -316,13 +280,8 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 	player:UpdateWeaponRaised();
 
 	// TODO: Put in moving hook on sprinting
-	player:SetSharedVar("IsRunMode", infoTable.isRunning);
 
 	// TODO: Redo infoTable system completely to be based on ran hooks rather than think hooks and timers
-	player:SetCrouchedWalkSpeed(math.max(infoTable.crouchedSpeed, 0), true);
-	player:SetWalkSpeed(math.max(infoTable.walkSpeed, 0), true);
-	player:SetJumpPower(math.max(infoTable.jumpPower, 0), true);
-	player:SetRunSpeed(math.max(infoTable.runSpeed, 0), true);
 
 	// TODO: Make into timer or hook depending on what's possible
 	local activeWeapon = player:GetActiveWeapon();
@@ -799,10 +758,6 @@ function Clockwork:GetPlayerWeaponRaised(player, class, weapon)
 
 	if (player:IsRunning() and cwConfig:Get("sprint_lowers_weapon"):Get()) then
 		return false;
-	end;
-
-	if (weapon:GetNetworkedBool("Ironsights")) then
-		return true;
 	end;
 
 	if (weapon:GetNetworkedInt("Zoom") != 0) then
@@ -2241,7 +2196,7 @@ function Clockwork:PlayerSetSharedVars(player, curTime)
 		player:SetColor(Color(255, 255, 255, 255));
 	end;
 
-	// TODO: Move this out to a timer? Maybe there's a hook that would work?
+	// TODO: Move grenade weapon stripping out to a timer? Maybe there's a hook that would work?
 	for k, v in pairs(player:GetWeapons()) do
 		local ammoType = v:GetPrimaryAmmoType();
 
@@ -5143,7 +5098,19 @@ end;
 	@returns {Unknown}
 --]]
 function Clockwork:KeyPress(player, key)
-	if (key == IN_USE) then
+	if (KEY == IN_RELOAD) then
+		local infoTable = {
+			["raiseTime"] = .3 // TODO: Add default raise time config option
+		};
+
+		timer.Create("cwRaiseDelay"..player:SteamID(), cwPlugin:Call("GetPlayerRaiseTime", player, infoTable), 1, function()
+			if (IsValid(player)) then
+				cwPly:ToggleWeaponRaised(player);
+				player.cwNextShootTime = curTime + cwConfig:Get("shoot_after_raise_time"):Get();
+			end;
+		end);
+
+	elseif (key == IN_USE) then
 		local trace = player:GetEyeTraceNoCursor();
 
 		if (IsValid(trace.Entity) and trace.HitPos:Distance(player:GetShootPos()) <= 192) then
@@ -5176,13 +5143,7 @@ function Clockwork:KeyPress(player, key)
 				player:RunCommand("+duck");
 			end;
 		end;
-	elseif (key == IN_RELOAD) then
-		if (cwPly:GetWeaponRaised(player, true)) then
-			player.cwReloadHoldTime = CurTime() + 0.75;
-		else
-			player.cwReloadHoldTime = CurTime() + 0.25;
-		end;
-	end;
+	// Gutted normal weapon raise stuff and replaced with timer stuff instead
 end;
 
 --[[
@@ -5223,8 +5184,8 @@ function Clockwork:PlayerCanQuickRaise(player, weapon) return true end;
 	@returns {Unknown}
 --]]
 function Clockwork:KeyRelease(player, key)
-	if (key == IN_RELOAD and player.cwReloadHoldTime) then
-		player.cwReloadHoldTime = nil;
+	if (key == IN_RELOAD) then
+		timer.Remove("cwRaiseDelay"..player:SteamID());
 	end;
 end;
 

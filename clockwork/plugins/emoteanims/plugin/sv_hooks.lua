@@ -12,7 +12,7 @@ function cwEmoteAnims:PostPlayerSpawn(player, lightSpawn, changeClass, firstSpaw
 		self:MakePlayerExitStance(player, true);
 	end;
 end;
-	
+
 -- Called when a player spawns lightly.
 function cwEmoteAnims:PostPlayerLightSpawn(player, weapons, ammo, special)
 	self:MakePlayerExitStance(player);
@@ -30,17 +30,19 @@ function cwEmoteAnims:PlayerCanFireWeapon(player, bIsRaised, weapon, bIsSecondar
 	end;
 end;
 
+// TODO: Move to timer that only is created once a player enters a forced animation
+
 -- Called at an interval while a player is connected.
 function cwEmoteAnims:PlayerThink(player, curTime, infoTable)
 	local forcedAnimation = player:GetForcedAnimation();
 	local isMoving = false;
 	local uniqueID = player:UniqueID();
-	
+
 	if (player:KeyDown(IN_FORWARD) or player:KeyDown(IN_BACK) or player:KeyDown(IN_MOVELEFT)
 	or player:KeyDown(IN_MOVERIGHT)) then
 		isMoving = true;
 	end;
-	
+
 	if (forcedAnimation and self.stanceList[forcedAnimation.animation]) then
 		if (player:GetPos():Distance(player:GetSharedVar("StancePos")) > 16
 		or !player:IsOnGround() or isMoving) then
@@ -65,7 +67,7 @@ end;
 -- Called when the player attempts to be ragdolled.
 function cwEmoteAnims:PlayerCanRagdoll(player, state, delay, decay, ragdoll)
 	local forcedAnimation = player:GetForcedAnimation();
-	
+
 	if (forcedAnimation and self.stanceList[forcedAnimation.animation]) then
 		if (player:Alive()) then
 			return false;
@@ -76,7 +78,7 @@ end;
 -- Called when a player attempts to NoClip.
 function cwEmoteAnims:PlayerNoClip(player)
 	local forcedAnimation = player:GetForcedAnimation();
-	
+
 	if (forcedAnimation and self.stanceList[forcedAnimation.animation]) then
 		return false;
 	end;

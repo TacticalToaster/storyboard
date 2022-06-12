@@ -117,12 +117,8 @@ Clockwork.config:Add("entity_handle_time", 0.1);
 Clockwork.config:Add("quick_raise_enabled", true);
 Clockwork.config:Add("modify_themes", false, true);
 Clockwork.config:Add("default_theme", "Schema", true);
-Clockwork.config:Add("enable_disease", false);
-Clockwork.config:Add("disease_interval", 60);
 
-Clockwork.config:Add("enable_ironsights", true, true);
-Clockwork.config:Add("ironsights_spread", 0.5, true);
-Clockwork.config:Add("ironsights_slow", 0.5, true);
+// Gutted ironsights and diseases
 
 Clockwork.config:Add("max_char_name", 32, true);
 

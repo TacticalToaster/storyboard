@@ -1223,35 +1223,13 @@ end;
 
 local WEAPON_LOWERED_ANGLES = Angle(30, -30, -25);
 local WEAPON_LOWERED_ORIGIN = Vector(0, 0, 0);
-local DEFAULT_IRONSIGHTS_ORIGIN = Vector(-3.481, -8.242, 1.039);
-local WEAPON_IRONSIGHTS = {
-	weapon_pistol = {
-		angles = Vector(0.493, -1.31, 2),
-		origin = Vector(-5.841, -8.643, 2.939)
-	},
-	weapon_ar2 = {
-		angles = Vector(0, 0, 0),
-		origin = Vector(-3.481, -8.242, 1.039)
-	},
-	weapon_smg1 = {
-		angles = Vector(1.208, 0, 0),
-		origin = Vector(-6.422, -5.85, 0.8)
-	},
-	weapon_357 = {
-		angles = Vector(0, -0.25, 1),
-		origin = Vector(-4.7, -2, 0.65)
-	},
-	weapon_shotgun = {
-		angles = Vector(0, 0, 0),
-		origin = Vector(-8.961, -6.633, 4.239)
-	}
-};
+
+// Gutted ironsights
 
 function Clockwork:CalcViewModelView(weapon, viewModel, oldEyePos, oldEyeAngles, eyePos, eyeAngles)
 	if (!IsValid(weapon)) then return; end;
 
 	local weaponRaised = Clockwork.player:GetWeaponRaised(Clockwork.Client);
-	local isIronSights = Clockwork.ironsights:GetIronSights();
 
 	if (!Clockwork.Client:HasInitialized() or !Clockwork.config:HasInitialized()
 	or Clockwork.Client:GetMoveType() == MOVETYPE_OBSERVER) then
@@ -1295,41 +1273,6 @@ function Clockwork:CalcViewModelView(weapon, viewModel, oldEyePos, oldEyeAngles,
 	oldEyePos = oldEyePos + ((eyeAngles:Forward() * viewInfo.origin.y) + (eyeAngles:Right() * viewInfo.origin.x) + (eyeAngles:Up() * viewInfo.origin.z)) * fraction;
 
 	Clockwork.Client.cwRaisedFraction = Lerp(FrameTime() * 2, Clockwork.Client.cwRaisedFraction or 100, targetValue)
-
-	--Ironsights.
-	local viewTable = WEAPON_IRONSIGHTS[weapon:GetClass()] or {};
-
-	Clockwork.plugin:Call("GetWeaponIronsightsViewInfo", itemTable, weapon, viewTable);
-
-	local ironAnglesMod = viewTable.angles;
-	local ironOriginMod = viewTable.origin or DEFAULT_IRONSIGHTS_ORIGIN;
-	local ironTargetValue = 0;
-
-	if ((ironAnglesMod or ironOriginMod) and isIronSights) then
-		ironTargetValue = 100;
-	end;
-
-	local fraction = (Clockwork.ironsights.ironFraction or 100) / 100;
-
-	if (ironAnglesMod) then
-		eyeAngles:RotateAroundAxis(eyeAngles:Up(), ironAnglesMod.y  * fraction);
-		eyeAngles:RotateAroundAxis(eyeAngles:Forward(), ironAnglesMod.z * fraction);
-		eyeAngles:RotateAroundAxis(eyeAngles:Right(), ironAnglesMod.x * fraction);
-	end;
-
-	if (ironOriginMod) then
-		oldEyePos = oldEyePos + ((eyeAngles:Forward() * ironOriginMod.y) + (eyeAngles:Right() * ironOriginMod.x) + (eyeAngles:Up() * ironOriginMod.z)) * fraction;
-	end;
-
-	local bLerp = true;
-
-	if (Clockwork.ironsights.ironFraction <= 1 and ironTargetValue == 0) then
-		bLerp = false;
-	end;
-
-	if (bLerp) then
-		Clockwork.ironsights.ironFraction = Lerp(FrameTime() * 5, Clockwork.ironsights.ironFraction or 100, ironTargetValue);
-	end;
 
 	-- Controls the position of all viewmodels
 	local func = weapon.GetViewModelPosition

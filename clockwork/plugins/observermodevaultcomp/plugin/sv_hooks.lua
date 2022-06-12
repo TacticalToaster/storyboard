@@ -12,6 +12,8 @@ function cwObserverMode:PlayerNoClip(player)
 	return false;
 end;
 
+// TODO: Make a timer created once put into observer?
+
 -- Called at an interval while a player is connected.
 function cwObserverMode:PlayerThink(player, curTime, infoTable)
 	if (!player:InVehicle() and !player:IsRagdolled() and !player:IsBeingHeld()
