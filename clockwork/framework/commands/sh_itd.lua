@@ -8,10 +8,10 @@
 
 local Clockwork = Clockwork;
 
-local COMMAND = Clockwork.command:New("MeD");
+local COMMAND = Clockwork.command:New("ItD");
 
-COMMAND.tip = "CmdMeD";
-COMMAND.text = "CmdMeDDesc";
+COMMAND.tip = "CmdItD";
+COMMAND.text = "CmdItDDesc";
 COMMAND.flags = bit.bor(CMD_DEFAULT, CMD_DEATHCODE);
 COMMAND.arguments = 1;
 
@@ -27,7 +27,7 @@ function COMMAND:OnRun(player, arguments)
 	end;
 
 	if (playerEye.Entity and playerEye.Entity:IsPlayer()) then
-		self:Add({playerEye.Entity}, player, "me", string.gsub(text, "^.", string.lower));
+		self:Add({playerEye.Entity}, player, "it", string.gsub(text, "^.", string.lower));
 	else
 		Clockwork.player:Notify(player, {"MustLookAtValidTarget"});
 	end;
