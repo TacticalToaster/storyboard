@@ -8,10 +8,10 @@
 
 local Clockwork = Clockwork;
 
-local COMMAND = Clockwork.command:New("MeL");
+local COMMAND = Clockwork.command:New("MeD");
 
-COMMAND.tip = "CmdMeL";
-COMMAND.text = "CmdMeLDesc";
+COMMAND.tip = "CmdMeD";
+COMMAND.text = "CmdMeDDesc";
 COMMAND.flags = bit.bor(CMD_DEFAULT, CMD_DEATHCODE);
 
 COMMAND.arguments = 1;
@@ -19,13 +19,19 @@ COMMAND.arguments = 1;
 -- Called when the command has been run.
 function COMMAND:OnRun(player, arguments)
 	local text = table.concat(arguments, " ");
-	
+	local playerEye = Player:GetEyeTrace()
+
 	if (text == "") then
 		Clockwork.player:Notify(player, {"NotEnoughText"});
+
 		return;
 	end;
 
-	Clockwork.chatBox:AddInTargetRadius(player, "mel", string.gsub(text, "^.", string.lower), player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 4);
+	if (playerEye.Entity and playerEye.Entity:IsPlayer()) then
+		self:Add({playerEye.Entity}, player, "me", string.gsub(text, "^.", string.lower));
+	else
+		Clockwork.player:Notify(player, {"MustLookAtValidTarget"});
+	end;
 end;
 
 COMMAND:Register();

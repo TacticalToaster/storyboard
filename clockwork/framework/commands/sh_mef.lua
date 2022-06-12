@@ -8,23 +8,24 @@
 
 local Clockwork = Clockwork;
 
-local COMMAND = Clockwork.command:New("ItL");
+local COMMAND = Clockwork.command:New("MeF");
 
-COMMAND.tip = "CmdItL";
-COMMAND.text = "CmdItLDesc";
-COMMAND.flags = CMD_DEFAULT;
+COMMAND.tip = "CmdMeF";
+COMMAND.text = "CmdMeFDesc";
+COMMAND.flags = bit.bor(CMD_DEFAULT, CMD_DEATHCODE);
+
 COMMAND.arguments = 1;
 
 -- Called when the command has been run.
 function COMMAND:OnRun(player, arguments)
 	local text = table.concat(arguments, " ");
-	
-	if (string.utf8len(text) < 8) then
+
+	if (text == "") then
 		Clockwork.player:Notify(player, {"NotEnoughText"});
 		return;
 	end;
 
-	Clockwork.chatBox:AddInTargetRadius(player, "itl", text, player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 4);
+	Clockwork.chatBox:AddInTargetRadius(player, "mef", string.gsub(text, "^.", string.lower), player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 4);
 end;
 
 COMMAND:Register();
