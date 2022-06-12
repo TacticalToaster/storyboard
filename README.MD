@@ -9,7 +9,7 @@
 </p>
 
 ## What is Storyboard?
-Storyboard is an updated and maintained roleplay framework for the game Garry's Mod. Storyboard was based off of the now deprecated [Clockwork](https://github.com/cloudsixteen/Clockwork). Storyboard is entirely open source and still in pretty early stages of development as of now so use is not recommended.
+Storyboard is an updated and maintained roleplay framework for the game Garry's Mod. Storyboard is based off of the now deprecated [Clockwork](https://github.com/cloudsixteen/Clockwork). Storyboard is entirely open source and still in pretty early stages of development as of now, so use is not recommended.
 
 ## Trello
 [Check out our plans!](https://trello.com/b/bxa0fpH5/storyboard)
