@@ -264,12 +264,7 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 		infoTable.wages = 0;
 	end;
 
-	// TODO: Timer create/delete hook this
-	if (player.cwReloadHoldTime and curTime >= player.cwReloadHoldTime) then
-		cwPly:ToggleWeaponRaised(player);
-		player.cwReloadHoldTime = nil;
-		player.cwNextShootTime = curTime + cwConfig:Get("shoot_after_raise_time"):Get();
-	end;
+	// TODO: Timer create/delete hook reload raise delay
 
 	// TODO: Should only need to do on ragdoll
 	if (player:IsRagdolled()) then
@@ -2241,7 +2236,7 @@ function Clockwork:PlayerSetSharedVars(player, curTime)
 		player:SetColor(Color(255, 255, 255, 255));
 	end;
 
-	// TODO: Move this out to a timer? Maybe there's a hook that would work?
+	// TODO: Move grenade weapon stripping out to a timer? Maybe there's a hook that would work?
 	for k, v in pairs(player:GetWeapons()) do
 		local ammoType = v:GetPrimaryAmmoType();
 
@@ -5143,7 +5138,19 @@ end;
 	@returns {Unknown}
 --]]
 function Clockwork:KeyPress(player, key)
-	if (key == IN_USE) then
+	if (KEY == IN_RELOAD) then
+		local infoTable = {
+			["raiseTime"] = .3 // TODO: Add default raise time config option
+		};
+
+		timer.Create("cwRaiseDelay"..player:SteamID(), cwPlugin:Call("GetPlayerRaiseTime", player, infoTable), 1, function()
+			if (IsValid(player)) then
+				cwPly:ToggleWeaponRaised(player);
+				player.cwNextShootTime = curTime + cwConfig:Get("shoot_after_raise_time"):Get();
+			end;
+		end);
+
+	elseif (key == IN_USE) then
 		local trace = player:GetEyeTraceNoCursor();
 
 		if (IsValid(trace.Entity) and trace.HitPos:Distance(player:GetShootPos()) <= 192) then
@@ -5176,13 +5183,7 @@ function Clockwork:KeyPress(player, key)
 				player:RunCommand("+duck");
 			end;
 		end;
-	elseif (key == IN_RELOAD) then
-		if (cwPly:GetWeaponRaised(player, true)) then
-			player.cwReloadHoldTime = CurTime() + 0.75;
-		else
-			player.cwReloadHoldTime = CurTime() + 0.25;
-		end;
-	end;
+	// Gutted normal weapon raise stuff and replaced with timer stuff instead
 end;
 
 --[[
@@ -5223,8 +5224,8 @@ function Clockwork:PlayerCanQuickRaise(player, weapon) return true end;
 	@returns {Unknown}
 --]]
 function Clockwork:KeyRelease(player, key)
-	if (key == IN_RELOAD and player.cwReloadHoldTime) then
-		player.cwReloadHoldTime = nil;
+	if (key == IN_RELOAD) then
+		timer.Remove("cwRaiseDelay"..player:SteamID());
 	end;
 end;
 
