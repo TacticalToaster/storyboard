@@ -259,51 +259,20 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 	local playBreathSound = false;
 	local storageTable = player:GetStorageTable();
 
-	if (!cwConfig:Get("cash_enabled"):Get()) then
-		player:SetCharacterData("Cash", 0, true);
-		infoTable.wages = 0;
-	end;
-
-	// TODO: Timer create/delete hook reload raise delay
-
-	// TODO: Should only need to do on ragdoll
-	if (player:IsRagdolled()) then
-		player:SetMoveType(MOVETYPE_OBSERVER);
-	end;
-
 	// TODO: Timer this
 	if (storageTable and cwPlugin:Call("PlayerStorageShouldClose", player, storageTable)) then
 		cwStorage:Close(player);
 	end;
 
-	// TODO: Shouldn't have to constantly update this, make modifying anything in the infoTables done through a method that updates stuff
-	player:SetSharedVar("InvWeight", math.ceil(infoTable.inventoryWeight));
-	player:SetSharedVar("InvSpace", math.ceil(infoTable.inventorySpace));
 	-- Gutting: Gutting wages, removed shared var.
 
-	// TODO: Put in damage hook
-	if (cwEvent:CanRun("limb_damage", "disability")) then
-		local leftLeg = cwLimb:GetDamage(player, HITGROUP_LEFTLEG, true);
-		local rightLeg = cwLimb:GetDamage(player, HITGROUP_RIGHTLEG, true);
-		local legDamage = math.max(leftLeg, rightLeg);
-
-		if (legDamage > 0) then
-			infoTable.runSpeed = infoTable.runSpeed / (1 + legDamage);
-			infoTable.jumpPower = infoTable.jumpPower / (1 + legDamage);
-		end;
-	end;
+	// TODO: Pulling limb system into a new plugin
 
 	// TODO: Either do this in a custom move system/hook or something else, this is shitty
-	if (player:KeyDown(IN_BACK)) then
-		infoTable.runSpeed = infoTable.runSpeed * 0.5;
-	end;
 
 	-- Gutting: Removed player infotable stuff for jogging, it's being gutted.
 
 	// TODO: Can also just do this in the custom move system/hook
-	if (infoTable.runSpeed < infoTable.walkSpeed) then
-		infoTable.runSpeed = infoTable.walkSpeed;
-	end;
 
 	// TODO: Try to see if I can make these not in timers/think hooks
 	--[[ Update whether the weapon has fired, or is being raised. --]]
@@ -311,13 +280,8 @@ function Clockwork:PlayerThink(player, curTime, infoTable)
 	player:UpdateWeaponRaised();
 
 	// TODO: Put in moving hook on sprinting
-	player:SetSharedVar("IsRunMode", infoTable.isRunning);
 
 	// TODO: Redo infoTable system completely to be based on ran hooks rather than think hooks and timers
-	player:SetCrouchedWalkSpeed(math.max(infoTable.crouchedSpeed, 0), true);
-	player:SetWalkSpeed(math.max(infoTable.walkSpeed, 0), true);
-	player:SetJumpPower(math.max(infoTable.jumpPower, 0), true);
-	player:SetRunSpeed(math.max(infoTable.runSpeed, 0), true);
 
 	// TODO: Make into timer or hook depending on what's possible
 	local activeWeapon = player:GetActiveWeapon();

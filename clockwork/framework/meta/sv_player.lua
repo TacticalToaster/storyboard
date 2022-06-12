@@ -1063,6 +1063,16 @@ function playerMeta:GetCharacters()
 	return self.cwCharacterList;
 end;
 
+// TODO: After evaluating whether it's worth keeping the cwVars for these and the infoTable, either gut or keep that functionality here
+
+function playerMeta:SetCarryWeight(weight, setClockworkVar)
+	player:SetSharedVar("InvWeight", math.ceil(weight));
+end;
+
+function playerMeta:SetCarrySpace(space, setClockworkVar)
+	player:SetSharedVar("InvSpace", math.ceil(space));
+end;
+
 -- A function to set a player's run speed.
 function playerMeta:SetRunSpeed(speed, setClockworkVar)
 	if (!setClockworkVar) then

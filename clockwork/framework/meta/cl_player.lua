@@ -50,10 +50,11 @@ function playerMeta:IsNoClipping()
 	return cwPly:IsNoClipping(self);
 end;
 
+// TODO: IsRunMode necessary? Gutting for now.
+
 -- A function to get whether a player is running.
 function playerMeta:IsRunning(bNoWalkSpeed)
-	if (self:Alive() and !self:IsRagdolled() and !self:InVehicle() and !self:Crouching()
-	and self:GetSharedVar("IsRunMode")) then
+	if (self:Alive() and !self:IsRagdolled() and !self:InVehicle() and !self:Crouching()) then
 		if (self:GetVelocity():Length() >= self:GetWalkSpeed()
 		or bNoWalkSpeed) then
 			return true;
