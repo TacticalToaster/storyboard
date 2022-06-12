@@ -610,8 +610,11 @@ CW_GERMAN["StartingFlags"] = "Starting Flags";
 CW_GERMAN["StartingFlagsDesc"] = "The flags that each player begins with.";
 CW_GERMAN["PlayerSprayEnabled"] = "Player Spray Enabled";
 CW_GERMAN["PlayerSprayEnabledDesc"] = "Whether players can spray their tags.";
-CW_GERMAN["HintInterval"] = "Hint Interval";
-CW_GERMAN["HintIntervalDesc"] = "The time that a hint is displayed to each player (seconds).";
+CW_GERMAN["OperatorFlags"] = "Operator Flags Given";
+CW_GERMAN["OperatorFlagsDesc"] = "When using /chargetflags operator's will receive the following flags.";
+CW_GERMAN["AdminFlags"] = "Admin Flags Given";
+CW_GERMAN["AdminFlagsDesc"] = "When using /chargetflags admin's will receive the following flags.";
+-- Gutting: Removal of Hint Language Stuff
 CW_GERMAN["OutOfCharacterChatInterval"] = "Out-Of-Character Chat Interval";
 CW_GERMAN["OutOfCharacterChatIntervalDesc"] = "The time that a player has to wait to speak out-of-character again (seconds).\nSet to 0 for never.";
 CW_GERMAN["MinuteTime"] = "Minute Time";
@@ -669,16 +672,7 @@ CW_GERMAN["PlayersChangeThemes"] = "Players Change Themes";
 CW_GERMAN["PlayersChangeThemesDesc"] = "Whether or not players can switch between available themes.";
 CW_GERMAN["DefaultTheme"] = "Default Theme";
 CW_GERMAN["DefaultThemeDesc"] = "The default theme that players will start with.";
-CW_GERMAN["EnableDiseases"] = "Enable Diseases";
-CW_GERMAN["EnableDiseasesDesc"] = "Whether or not you want use of the disease library to be enabled.";
-CW_GERMAN["DiseaseInterval"] = "Disease Interval";
-CW_GERMAN["DiseaseIntervalDesc"] = "The number of seconds between each run of the symptom function.";
-CW_GERMAN["EnableIronsights"] = "Enable Ironsights";
-CW_GERMAN["EnableIronsightsDesc"] = "Whether or not players can use ironsights on their weapons when available.";
-CW_GERMAN["IronsightsSpreadReduction"] = "Ironsights Spread Reduction";
-CW_GERMAN["IronsightsSpreadReductionDesc"] = "The amount that ironsights will reduce bullet spread by.";
-CW_GERMAN["IronsightsSlowAmount"] = "Ironsights Slow Amount";
-CW_GERMAN["IronsightsSlowAmountDesc"] = "The amount that using ironsights will decrease a player's movement speed by.";
+-- Gutting: Removal of ironsights and diseases
 CW_GERMAN["CraftingDescription"] = "Crafting Description";
 CW_GERMAN["CraftingDescriptionDesc"] = "The description of what the crafting menu does.";
 CW_GERMAN["CraftingEnabled"] = "Crafting Enabled";
@@ -688,19 +682,7 @@ CW_GERMAN["CraftingNameDesc"] = "The name of the button to open the crafting men
 CW_GERMAN["MaxCharName"] = "Character Name Limit";
 CW_GERMAN["MaxCharNameDesc"] = "The maximum amount of characters someone can use in their name.";
 
-CW_GERMAN["HintOOC"] = "Type // before your message to talk out-of-character.";
-CW_GERMAN["HintLOOC"] = "Type .// or [[before your message to talk out-of-character locally.";
-CW_GERMAN["HintDucking"] = "Toggle ducking by holding :+speed: and pressing :+walk: while standing still.";
-CW_GERMAN["HintJogging"] = "Toggle jogging by pressing :+walk: while moving.";
-CW_GERMAN["HintDirectory"] = "Halte down :+showscores: und klicke *name_directory* um Hilfe zu bekommen.";
-CW_GERMAN["HintHotkeyF1"] = "Halte :gm_showhelp: to view your character and roleplay information.";
-CW_GERMAN["HintHotkeyF2"] = "Drücke :gm_showteam: while looking at a door to view the door menu.";
-CW_GERMAN["HintHotkeyTab"] = "Drücke :+showscores: to view the main menu, or hold :+showscores: to temporarily view it.";
-CW_GERMAN["HintContextMenu"] = "Halte :+menu_context: and click on an entity to open its menu.";
-CW_GERMAN["HintEntityMenu"] = "Drücle :+use: on an entity to open its menu.";
-CW_GERMAN["HintPhysDesc"] = "Change your character's physical description by typing $command_prefix$CharPhysDesc.";
-CW_GERMAN["HintGiveName"] = "Drücke :gm_showteam: to allow characters within a specific range to recognise you.";
-CW_GERMAN["HintTargetRecognises"] = "A character's name will flash white if they do not recognise you.";
+-- Gutting: Removal of Hint Language Stuff
 
 CW_GERMAN["YouHaveNotCompletedThe"] = "Du hast nicht die #3 abgeschlossen!";
 CW_GERMAN["MenuQuizTitle"] = "Beitrits Prüfung";

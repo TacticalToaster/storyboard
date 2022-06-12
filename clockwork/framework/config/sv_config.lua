@@ -118,7 +118,7 @@ Clockwork.config:Add("quick_raise_enabled", true);
 Clockwork.config:Add("modify_themes", false, true);
 Clockwork.config:Add("default_theme", "Schema", true);
 
-// Gutted ironsights and diseases
+// Gutted: ironsights and diseases
 
 Clockwork.config:Add("max_char_name", 32, true);
 
@@ -126,3 +126,7 @@ Clockwork.config:Add("description_crafting", "Combine various items to make new 
 Clockwork.config:Add("crafting_menu_enabled", false, true);
 
 Clockwork.config:Add("enable_voice_commands", true, true);
+
+-- Added: Base rank flag options
+Clockwork.config:Add("op_flags", "pet", true);
+Clockwork.config:Add("admin_flags", "petrncG", true);

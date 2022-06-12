@@ -47,3 +47,6 @@ Clockwork.config:ShareKey("enable_looc_icons");
 Clockwork.config:ShareKey("description_crafting");
 Clockwork.config:ShareKey("crafting_menu_enabled");
 Clockwork.config:ShareKey("enable_voice_commands");
+-- Added: Base rank flag options
+Clockwork.config:ShareKey("op_flags");
+Clockwork.config:ShareKey("admin_flags");

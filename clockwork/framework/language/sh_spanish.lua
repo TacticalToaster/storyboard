@@ -608,8 +608,11 @@ CW_SPANISH["StartingFlags"] = "Flags iniciales";
 CW_SPANISH["StartingFlagsDesc"] = "Las flags con las que cada jugador empieza al crear su personaje.";
 CW_SPANISH["PlayerSprayEnabled"] = "Sprays habilitados";
 CW_SPANISH["PlayerSprayEnabledDesc"] = "Activar o desactivar el uso de sprays en el servidor.";
-CW_SPANISH["HintInterval"] = "Intervalo de consejos";
-CW_SPANISH["HintIntervalDesc"] = "El intervalo de tiempo durante el cual un consejo se muestra al jugador (en segundos).";
+CW_SPANISH["OperatorFlags"] = "Indicadores de operador dados"; -- Google translated.
+CW_SPANISH["OperatorFlagsDesc"] = "Al usar /chargetflags, el operador recibirá las siguientes banderas."; -- Google translated.
+CW_SPANISH["AdminFlags"] = "Indicadores de administración dados"; -- Google translated.
+CW_SPANISH["AdminFlagsDesc"] = "Al usar /chargetflags, los administradores recibirán las siguientes banderas."; -- Google translated.
+-- Gutting: Removal of Hint Language Stuff
 CW_SPANISH["OutOfCharacterChatInterval"] = "Intervalo OOC";
 CW_SPANISH["OutOfCharacterChatIntervalDesc"] = "El tiempo que un jugador tiene que esperar para hablar por el canal OOC de nuevo (en segundos).\nPon 0 para eliminar el tiempo de espera.";
 CW_SPANISH["MinuteTime"] = "Duración de un minuto";

@@ -90,8 +90,11 @@ Clockwork.config:AddToSystem("EntityUseCooldown", "entity_handle_time", "EntityU
 Clockwork.config:AddToSystem("EnableQuickRaise", "quick_raise_enabled", "EnableQuickRaiseDesc");
 Clockwork.config:AddToSystem("PlayersChangeThemes", "modify_themes", "PlayersChangeThemesDesc");
 Clockwork.config:AddToSystem("DefaultTheme", "default_theme", "DefaultThemeDesc");
-// Gutted ironsights and diseases
+// Gutted: ironsights and diseases
 Clockwork.config:AddToSystem("MaxCharName", "max_char_name", "MaxCharNameDesc", 1, 100);
 Clockwork.config:AddToSystem("CraftingDescription", "description_crafting", "CraftingDescriptionDesc");
 Clockwork.config:AddToSystem("CraftingEnabled", "crafting_menu_enabled", "CraftingEnabledDesc");
 Clockwork.config:AddToSystem("EnableVCs", "enable_voice_commands", "EnableVCsDesc");
+-- Added: Base rank flag options
+Clockwork.config:AddToSystem("OperatorFlags", "op_flags", "OperatorFlagsDesc");
+Clockwork.config:AddToSystem("AdminFlags", "admin_flags", "AdminFlagsDesc");

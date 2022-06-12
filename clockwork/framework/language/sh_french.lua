@@ -458,8 +458,7 @@ CW_FRENCH["EnableTwelveHourClock"] = "Activer l'horloge de douze heures";
 CW_FRENCH["EnableTwelveHourClockDesc"] = "Indiquer ou non une horloge de douze heures.";
 CW_FRENCH["ShowTopBars"] = "Afficher les barres du haut";
 CW_FRENCH["ShowTopBarsDesc"] = "Indiquer ou non des barres en haut de l'écran.";
-CW_FRENCH["EnableHintsSystem"] = "Activer le système d'astuces";
-CW_FRENCH["EnableHintsSystemDesc"] = "Qu'il s'agisse ou non de vous montrer des astuces.";
+-- Gutting: Removal of Hint Language Stuff
 CW_FRENCH["EnableVignette"] = "Activer Vignette";
 CW_FRENCH["EnableVignetteDesc"] = "Que l'on affiche ou non la vignette.";
 CW_FRENCH["ShowMessageTimeStamps"] = "Afficher le temps des messages";
@@ -608,8 +607,11 @@ CW_FRENCH["StartingFlags"] = "Flags de départ";
 CW_FRENCH["StartingFlagsDesc"] = "Les flags avec lesquelles les joueurs commence.";
 CW_FRENCH["PlayerSprayEnabled"] = "Spray Activé";
 CW_FRENCH["PlayerSprayEnabledDesc"] = "Si oui ou non vous voulez activer les tags des joueurs.";
-CW_FRENCH["HintInterval"] = "Intervalle des astuces";
-CW_FRENCH["HintIntervalDesc"] = "Le moment où les astuces sont affiché pour chaque joueur (secondes).";
+CW_ENGLISH["OperatorFlags"] = "Indicateurs d'opérateur donnés";
+CW_ENGLISH["OperatorFlagsDesc"] = "Lors de l'utilisation de /chargetflags, l'opérateur recevra les drapeaux suivants.";
+CW_ENGLISH["AdminFlags"] = "Indicateurs d'administration donnés";
+CW_ENGLISH["AdminFlagsDesc"] = "Lors de l'utilisation de /chargetflags, les administrateurs recevront les drapeaux suivants.";
+-- Gutting: Removal of Hint Language Stuff
 CW_FRENCH["OutOfCharacterChatInterval"] = "Intervalle de conversation OOC";
 CW_FRENCH["OutOfCharacterChatIntervalDesc"] = "Le temps d'attente pour envoyer un message OOC (secondes).\nMettre à 0 pour pas de temps.";
 CW_FRENCH["MinuteTime"] = "Temps d'une minute";
@@ -684,17 +686,7 @@ CW_FRENCH["CraftingEnabledDesc"] = "Que le menu d'artisanat soit activé.";
 CW_FRENCH["CraftingName"] = "Nom de l'Artisanat";
 CW_FRENCH["CraftingNameDesc"] = "Le nom du bouton pour ouvrir le menu d'artisanat.";
 
-CW_FRENCH["HintOOC"] = "Tapez // avant votre message pour parler OOC.";
-CW_FRENCH["HintLOOC"] = "Tapez .// ou [[ avant votre message pour parler LOOC.";
-CW_FRENCH["HintDirectory"] = "Maintenir enfoncée :+showscores: et cliquez sur *name_directory* pour obtenir de l'aide.";
-CW_FRENCH["HintHotkeyF1"] = "Maintenir :gm_showhelp: pour voir votre personnage et vos informations.";
-CW_FRENCH["HintHotkeyF2"] = "Appuyer :gm_showteam: en regardant une porte pour voir le menu de la porte.";
-CW_FRENCH["HintHotkeyTab"] = "Appuyer :+showscores: pour afficher le menu principal, ou maintenez :+showscores: pour le visualiser temporairement.";
-CW_FRENCH["HintContextMenu"] = "Maintenir :+menu_context: et cliquez sur une entité pour ouvrir son menu.";
-CW_FRENCH["HintEntityMenu"] = "Appuyer :+use: sur une entité pour ouvrir son menu.";
-CW_FRENCH["HintPhysDesc"] = "Changez la description physique de votre personnage en tapant $command_prefix$CharPhysDesc.";
-CW_FRENCH["HintGiveName"] = "Appuyer :gm_showteam: permettre aux personnages autour de vous reconnaître.";
-CW_FRENCH["HintTargetRecognises"] = "Le nom d'un personnage clignote en blanc s'il ne vous reconnaît pas.";
+-- Gutting: Removal of Hint Language Stuff
 
 CW_FRENCH["YouHaveNotCompletedThe"] = "Vous n'avez pas complété le #3!";
 CW_FRENCH["MenuQuizTitle"] = "Examen d'entrée";

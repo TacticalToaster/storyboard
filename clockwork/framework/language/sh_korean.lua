@@ -466,8 +466,7 @@ CW_KOREAN["EnableTwelveHourClock"] = "12시간 시계 활성화";
 CW_KOREAN["EnableTwelveHourClockDesc"] = "시계를 12시간 형식으로 표기할지에 대한 여부입니다.";
 CW_KOREAN["ShowTopBars"] = "톱 바 표시";
 CW_KOREAN["ShowTopBarsDesc"] = "화면 상단에 캐릭터와 관련된 바를 표시할지에 대한 여부입니다.";
-CW_KOREAN["EnableHintsSystem"] = "힌트 시스템 활성화";
-CW_KOREAN["EnableHintsSystemDesc"] = "힌트를 보여줄지 말지에 대한 여부입니다.";
+-- Gutting: Removal of Hint Language Stuff
 CW_KOREAN["EnableVignette"] = "명암 활성화";
 CW_KOREAN["EnableVignetteDesc"] = "명암을 표시할지에 대한 여부입니다.";
 CW_KOREAN["ShowMessageTimeStamps"] = "메세지 타임 스탬프 표시";
@@ -616,8 +615,11 @@ CW_KOREAN["StartingFlags"] = "시작 플래그";
 CW_KOREAN["StartingFlagsDesc"] = "플레이어가 기본적으로 가지고 있을 플래그입니다.";
 CW_KOREAN["PlayerSprayEnabled"] = "플레이어 스프레이 활성화";
 CW_KOREAN["PlayerSprayEnabledDesc"] = "플레이어가 스프레이를 뿌릴 수 있는지에 대한 여부입니다.";
-CW_KOREAN["HintInterval"] = "힌트 인터벌";
-CW_KOREAN["HintIntervalDesc"] = "플레이어에게 힌트가 표기되는 간격에 대한 값입니다. (초)";
+CW_KOREAN["OperatorFlags"] = "주어진 연산자 플래그"; -- Google translated.
+CW_KOREAN["OperatorFlagsDesc"] = "/chargetflags 연산자를 사용할 때 다음 플래그를 수신합니다."; -- Google translated.
+CW_KOREAN["AdminFlags"] = "주어진 관리자 플래그"; -- Google translated.
+CW_KOREAN["AdminFlagsDesc"] = "/chargetflags를 사용할 때 관리자는 다음 플래그를 수신합니다."; -- Google translated.
+-- Gutting: Removal of Hint Language Stuff
 CW_KOREAN["OutOfCharacterChatInterval"] = "OOC 채팅 인터벌";
 CW_KOREAN["OutOfCharacterChatIntervalDesc"] = "OOC 채팅을 다시 하려면 얼마나 기다려야 하는지에 대한 값입니다. (초)";
 CW_KOREAN["MinuteTime"] = "분 시간";
@@ -694,19 +696,7 @@ CW_KOREAN["CraftingNameDesc"] = "제작 메뉴를 여는 버튼의 이름에 대
 CW_KOREAN["MaxCharName"] = "캐릭터 이름 제한";
 CW_KOREAN["MaxCharNameDesc"] = "캐릭터의 이름의 최대 길이에 대한 값입니다.";
 
-CW_KOREAN["HintOOC"] = "OOC로 대화하려면 // 뒤에 할말을 붙혀 OOC 대화를 할 수 있습니다.";
-CW_KOREAN["HintLOOC"] = "LOOC로 대화하려면 .// 뒤에 할말을 붙혀 LOOC 대화를 할 수 있습니다.";
-CW_KOREAN["HintDucking"] = "캐릭터를 계속 숙이고 있으려면 가만히 서 있는 동안 :+speed: 키와 :+walk: 키를 눌러 계속 숙일 수 있습니다.";
-CW_KOREAN["HintJogging"] = "캐릭터를 계속 움직이려면 움직이는 동안 :+walk: 키를 눌러 계속 움직일 수 있습니다.";
-CW_KOREAN["HintDirectory"] = "도움말을 보려면 :+showscores: 키를 누른 뒤 *name_directory* 메뉴를 열어 도움말을 볼 수 있습니다.";
-CW_KOREAN["HintHotkeyF1"] = ":gm_showhelp: 키를 눌러 당신의 캐릭터의 정보를 볼 수 있습니다.";
-CW_KOREAN["HintHotkeyF2"] = "문을 보는 동안 :gm_showteam: 키를 눌러 문 메뉴를 열 수 있습니다.";
-CW_KOREAN["HintHotkeyTab"] = ":+showscores: 키를 눌러 메뉴를 열 수 있으며, :+showscores: 키를 계속 누르고 있으면 키를 누르고 있는 동안만 표시할 수도 있습니다.";
-CW_KOREAN["HintContextMenu"] = ":+menu_context: 키를 누른 뒤 엔티티를 클릭하여 엔티티의 메뉴를 열 수 있습니다.";
-CW_KOREAN["HintEntityMenu"] = ":+use: 키를 눌러 엔티티의 메뉴를 열 수 있습니다.";
-CW_KOREAN["HintPhysDesc"] = "만약 캐릭터의 설명을 바꾸고 싶다면 $command_prefix$CharPhysDesc 명령어를 사용 해 보세요.";
-CW_KOREAN["HintGiveName"] = ":gm_showteam: 키를 눌러 특정 범위나 대상으로 자기 자신을 인식시킬 수 있습니다.";
-CW_KOREAN["HintTargetRecognises"] = "만약 캐릭터를 인식하지 못한 경우 캐릭터의 이름이 흰색으로 깜박입니다.";
+-- Gutting: Removal of Hint Language Stuff
 
 CW_KOREAN["YouHaveNotCompletedThe"] = "당신은 아직 #3 를 완료하지 않았습니다!";
 CW_KOREAN["MenuQuizTitle"] = "퀴즈";

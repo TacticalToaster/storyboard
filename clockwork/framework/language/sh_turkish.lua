@@ -458,8 +458,7 @@ CW_TURKISH["EnableTwelveHourClock"] = "On İki Saat Saati Etkinleştir";
 CW_TURKISH["EnableTwelveHourClockDesc"] = "On iki saatlik bir saat gösterilip gösterilmeyeceği.";
 CW_TURKISH["ShowTopBars"] = "Üstteki Çubukları Göster";
 CW_TURKISH["ShowTopBarsDesc"] = "Ekranın üstündeki çubukların gösterilip gösterilmeyeceği.";
-CW_TURKISH["EnableHintsSystem"] = "İpuçları Sistemini Etkinleştir";
-CW_TURKISH["EnableHintsSystemDesc"] = "Size herhangi bir ipucu gösterip göstermemesi.";
+-- Gutting: Removal of Hint Language Stuff
 CW_TURKISH["EnableVignette"] = "Kenar Efektini Etkinleştir";
 CW_TURKISH["EnableVignetteDesc"] = "Kenar efektinin gösterilip gösterilmemesi.";
 CW_TURKISH["ShowMessageTimeStamps"] = "Mesaj Zaman Pullarını Göster";
@@ -608,8 +607,11 @@ CW_TURKISH["StartingFlags"] = "Başlangıç Flagları";
 CW_TURKISH["StartingFlagsDesc"] = "Her oyuncunun başlangıçta sahip olduğu flaglar.";
 CW_TURKISH["PlayerSprayEnabled"] = "Oyuncu Spreyi Aktif";
 CW_TURKISH["PlayerSprayEnabledDesc"] = "Oyuncuların kendi etiketlerini spreyleyebilmesi.";
-CW_TURKISH["HintInterval"] = "İpucu Süresi";
-CW_TURKISH["HintIntervalDesc"] = "Her oyuncu için bir ipucunun görüntülenme süresi (saniye).";
+CW_TURKISH["OperatorFlags"] = "Verilen Operatör Bayrakları";
+CW_TURKISH["OperatorFlagsDesc"] = "/chargetflags operatörünü kullanırken aşağıdaki bayrakları alır.";
+CW_TURKISH["AdminFlags"] = "Verilen Yönetici Bayrakları";
+CW_TURKISH["AdminFlagsDesc"] = "/chargetflags'ı kullanırken adminler aşağıdaki bayrakları alacaklardır.";
+-- Gutting: Removal of Hint Language Stuff
 CW_TURKISH["OutOfCharacterChatInterval"] = "OOC Sohbet Bekletmesi";
 CW_TURKISH["OutOfCharacterChatIntervalDesc"] = "Bir oyuncunun karakter dışında tekrar konuşmak için beklemesi gereken süre (saniye).\nKapatmak için 0 yap.";
 CW_TURKISH["MinuteTime"] = "Dakika Süresi";
@@ -686,19 +688,7 @@ CW_TURKISH["CraftingNameDesc"] = "Üretim menüsünü açmak için olan düğmen
 CW_TURKISH["MaxCharName"] = "Karakter İsim Limiti";
 CW_TURKISH["MaxCharNameDesc"] = "Birinin isminde kullanabileceği maksimum karakter.";
 
-CW_TURKISH["HintOOC"] = "Karakter dışı konuşmak için mesajınızdan önce // yazın.";
-CW_TURKISH["HintLOOC"] = "Yerel olarak karakter dışı konuşmak için mesajınızı göndermeden önce .// veya [[<mesaj> yazın.";
-CW_TURKISH["HintDucking"] = "Durduğunuz yerde :+speed: ve :+walk: tuşuna basılı tutarak eğilebilirsiniz.";
-CW_TURKISH["HintJogging"] = "Tempolu koşuyu etkinleştirmek için yürürken :+walk: tuşuna basınız.";
-CW_TURKISH["HintDirectory"] = "Yardım almak için :+showscores: tuşuna basılı tutun ve *name_directory* seçeneğine tıklayın.";
-CW_TURKISH["HintHotkeyF1"] = "Karakterinizi ve rol oynama bilgilerinizi görüntülemek için :gm_showhelp: tutun.";
-CW_TURKISH["HintHotkeyF2"] = "Kapı menüsünü görüntülemek için bir kapıya bakarken :gm_showteam: tuşuna basın.";
-CW_TURKISH["HintHotkeyTab"] = "Ana menüyü görüntülemek için :+showscores: tuşuna basın veya geçici olarak görüntülemek için +showscores: tuşuna basılı tutun.";
-CW_TURKISH["HintContextMenu"] = "Bir eşyanın menüsünü açmak için :+menu_context: tuşuna basılı tutun ve bir eşyanın üzerine tıklayın.";
-CW_TURKISH["HintEntityMenu"] = "Bir eşyanın menüsünü açmak için :+use: tuşuna basınız.";
-CW_TURKISH["HintPhysDesc"] = "Karakterinizin fiziksel açıklamasını $command_prefix$CharPhysDesc yazarak değiştirin.";
-CW_TURKISH["HintGiveName"] = "Belirli bir alandaki karakterlerin sizi tanımasına izin vermek için :gm_showteam: tuşuna basın.";
-CW_TURKISH["HintTargetRecognises"] = "Bir karakterin adı sizi beyaz renkte yanıp sönüyorsa sizi tanımıyordur.";
+-- Gutting: Removal of Hint Language Stuff
 
 CW_TURKISH["YouHaveNotCompletedThe"] = "#3 sorusunu tamamlamadınız!";
 CW_TURKISH["MenuQuizTitle"] = "Sınav";

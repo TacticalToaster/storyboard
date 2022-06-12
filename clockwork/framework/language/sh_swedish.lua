@@ -458,8 +458,7 @@ CW_SWEDISH["EnableTwelveHourClock"] = "Aktivera Tolv-Timmars Klockan";
 CW_SWEDISH["EnableTwelveHourClockDesc"] = "Om man ska visa Tolv-Timmars Klockan.";
 CW_SWEDISH["ShowTopBars"] = "Visa övre staplarna";
 CW_SWEDISH["ShowTopBarsDesc"] = "Om man ska visa staplarna som finns högst upp på skärmen.";
-CW_SWEDISH["EnableHintsSystem"] = "Aktivera Förslag Systemet";
-CW_SWEDISH["EnableHintsSystemDesc"] = "Om det ska visa förslag för spelarna.";
+-- Gutting: Removal of Hint Language Stuff
 CW_SWEDISH["EnableVignette"] = "Aktivera Vignette";
 CW_SWEDISH["EnableVignetteDesc"] = "Om det ska renderas vignette på skärmen.";
 CW_SWEDISH["ShowMessageTimeStamps"] = "Visa tidsangivelser på meddelanden";
@@ -608,8 +607,11 @@ CW_SWEDISH["StartingFlags"] = "Start Flaggor";
 CW_SWEDISH["StartingFlagsDesc"] = "Flaggorna som varje spelare börjar med";
 CW_SWEDISH["PlayerSprayEnabled"] = "Spelar-Spray Aktiverad";
 CW_SWEDISH["PlayerSprayEnabledDesc"] = "Om spelare kan använda sin egna spray.";
-CW_SWEDISH["HintInterval"] = "Tips Intervall";
-CW_SWEDISH["HintIntervalDesc"] = "Tiden som varje tips visas (sekunder).";
+CW_ENGLISH["OperatorFlags"] = "Operatörsflaggor ges"; -- Google translated.
+CW_ENGLISH["OperatorFlagsDesc"] = "När du använder /chargetflags kommer operatörerna att få följande flaggor."; -- Google translated.
+CW_ENGLISH["AdminFlags"] = "Admin flaggor ges"; -- Google translated.
+CW_ENGLISH["AdminFlagsDesc"] = "När du använder /chargetflags kommer administratörer att få följande flaggor."; -- Google translated.
+-- Gutting: Removal of Hint Language Stuff
 CW_SWEDISH["OutOfCharacterChatInterval"] = "Ur Karaktär Chatt Intervall";
 CW_SWEDISH["OutOfCharacterChatIntervalDesc"] = "Tiden som spelare måste vänta innan dom kan skriva igen i Ur-Karaktär chatten (sekunder).\nVälj 0 för ingen intervall.";
 CW_SWEDISH["MinuteTime"] = "Minut Tid";
@@ -684,19 +686,7 @@ CW_SWEDISH["CraftingEnabledDesc"] = "Om Skapelser menyn ska vara aktiverad.";
 CW_SWEDISH["CraftingName"] = "Skapelse Namn";
 CW_SWEDISH["CraftingNameDesc"] = "Namnet på knappen för att öppna Skapelser Menyn.";
 
-CW_SWEDISH["HintOOC"] = "Skriv // före ditt meddelande för att tala Ur-Karaktär.";
-CW_SWEDISH["HintLOOC"] = "Skriv .// eller [[före ditt meddelande för att prata Ur-Karaktär Lokalt.";
-CW_SWEDISH["HintDucking"] = "Aktivera hukning genom att hålla ner :+speed: och trycka på :+walk: medans du står still.";
-CW_SWEDISH["HintJogging"] = "Aktivera joggning genom att trycka på :+walk: när du rör dig.";
-CW_SWEDISH["HintDirectory"] = "Håll nere :+showscores: och klicka på *name_directory* för att få hjälp.";
-CW_SWEDISH["HintHotkeyF1"] = "Håll nere :gm_showhelp: för att visa din karaktär och dens information.";
-CW_SWEDISH["HintHotkeyF2"] = "Tryck :gm_showteam: när du tittar på en dörr för att få upp dörrens meny.";
-CW_SWEDISH["HintHotkeyTab"] = "Tryck :+showscores: för att visa huvudmenyn. Du kan annars hålla ner :+showscores: för att visa menyn temporärt.";
-CW_SWEDISH["HintContextMenu"] = "Håll nere :+menu_context: och klicka på ett föremål för att öppna föremålets meny.";
-CW_SWEDISH["HintEntityMenu"] = "Tryck :+use: på ett föremål för att öppna föremålets meny.";
-CW_SWEDISH["HintPhysDesc"] = "Ändra din fysiska beskrivning genom att skriva $command_prefix$CharPhysDesc.";
-CW_SWEDISH["HintGiveName"] = "Tryck :gm_showteam: för att låta spelare i din omgivning att känna igen dig.";
-CW_SWEDISH["HintTargetRecognises"] = "En karaktärs namn kommer blinka vitt om du inte känner igen den.";
+-- Gutting: Removal of Hint Language Stuff
 
 CW_SWEDISH["YouHaveNotCompletedThe"] = "Du har inte avklarat #3!";
 CW_SWEDISH["MenuQuizTitle"] = "Antagnings Examen";
