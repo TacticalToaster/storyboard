@@ -1,4 +1,4 @@
---[[ 
+--[[
 	© CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 
@@ -703,7 +703,7 @@ end;
 function Clockwork.animation:GetMenuSequence(model, bRandom)
 	local lowerModel = string.lower(model);
 	local sequence = self.sequences[lowerModel];
-	
+
 	if (sequence) then
 		if (type(sequence) == "table") then
 			if (bRandom) then
@@ -740,11 +740,11 @@ end;
 --]]
 function Clockwork.animation:AddOverride(model, key, value)
 	local lowerModel = string.lower(model);
-	
+
 	if (!self.override[lowerModel]) then
 		self.override[lowerModel] = {};
 	end;
-	
+
 	self.override[lowerModel][key] = value;
 end;
 
@@ -758,7 +758,7 @@ end;
 function Clockwork.animation:GetForModel(model, key)
 	if (!model) then
 		debug.Trace();
-		
+
 		return false;
 	end;
 
@@ -766,11 +766,11 @@ function Clockwork.animation:GetForModel(model, key)
 	local animTable = self:GetTable(lowerModel);
 	local overrideTable = self.override[lowerModel];
 	local finalAnimation = animTable[key];
-	
+
 	if (overrideTable and overrideTable[key]) then
 		finalAnimation = overrideTable[key];
 	end;
-	
+
 	return finalAnimation;
 end;
 
@@ -783,7 +783,7 @@ end;
 --]]
 function Clockwork.animation:GetModelClass(model, alwaysReal)
 	local modelClass = self.models[string.lower(model)];
-	
+
 	if (!modelClass) then
 		if (!alwaysReal) then
 			return "maleHuman";
@@ -845,6 +845,16 @@ end;
 
 --[[
 	@codebase Shared
+	@details A function to add a player model.
+	@param {Unknown} Missing description for model.
+	@returns {Unknown}
+--]]
+function Clockwork.animation:AddPlayerModel(model)
+	return self:AddModel("player", model);
+end;
+
+--[[
+	@codebase Shared
 	@details A function to get a weapon's hold type.
 	@param {Unknown} Missing description for player.
 	@param {Unknown} Missing description for weapon.
@@ -853,7 +863,7 @@ end;
 function Clockwork.animation:GetWeaponHoldType(player, weapon)
 	local class = string.lower(weapon:GetClass());
 	local holdType = "fist";
-	
+
 	if (self.holdTypes[class]) then
 		holdType = self.holdTypes[class];
 	elseif (IsValid(weapon)) then
@@ -862,12 +872,12 @@ function Clockwork.animation:GetWeaponHoldType(player, weapon)
 		holdType = self.convert[_holdType] or _holdType;
 	else
 		local act = player:Weapon_TranslateActivity(ACT_HL2MP_IDLE) or -1;
-		
+
 		if (act != -1 and self.convert[act]) then
 			holdType = self.convert[act];
 		end;
 	end;
-	
+
 	return string.lower(holdType);
 end;
 
@@ -880,10 +890,10 @@ end;
 function Clockwork.animation:GetTable(model)
 	local lowerModel = string.lower(model);
 	local class = self.models[lowerModel];
-	
+
 	if (class and self.stored[class]) then
 		return self.stored[class];
-	elseif (string.find(lowerModel, "/player/")) then
+	elseif (string.find(lowerModel, "/player/") or string.find(lowerModel, "pm_") or string.find(lowerModel, "playermodel")) then
 		return self.stored.player;
 	elseif (string.find(lowerModel, "female")) then
 		return self.stored.femaleHuman;
