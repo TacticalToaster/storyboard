@@ -90,11 +90,7 @@ Clockwork.config:AddToSystem("EntityUseCooldown", "entity_handle_time", "EntityU
 Clockwork.config:AddToSystem("EnableQuickRaise", "quick_raise_enabled", "EnableQuickRaiseDesc");
 Clockwork.config:AddToSystem("PlayersChangeThemes", "modify_themes", "PlayersChangeThemesDesc");
 Clockwork.config:AddToSystem("DefaultTheme", "default_theme", "DefaultThemeDesc");
-Clockwork.config:AddToSystem("EnableDiseases", "enable_disease", "EnableDiseasesDesc");
-Clockwork.config:AddToSystem("DiseaseInterval", "disease_interval", "DiseaseIntervalDesc");
-Clockwork.config:AddToSystem("EnableIronsights", "enable_ironsights", "EnableIronsightsDesc");
-Clockwork.config:AddToSystem("IronsightsSpreadReduction", "ironsights_spread", "IronsightsSpreadReductionDesc", 0, 1, 3);
-Clockwork.config:AddToSystem("IronsightsSlowAmount", "ironsights_slow", "IronsightsSlowAmountDesc", 0, 1, 3);
+// Gutted ironsights and diseases
 Clockwork.config:AddToSystem("MaxCharName", "max_char_name", "MaxCharNameDesc", 1, 100);
 Clockwork.config:AddToSystem("CraftingDescription", "description_crafting", "CraftingDescriptionDesc");
 Clockwork.config:AddToSystem("CraftingEnabled", "crafting_menu_enabled", "CraftingEnabledDesc");

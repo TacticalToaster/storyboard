@@ -760,10 +760,6 @@ function Clockwork:GetPlayerWeaponRaised(player, class, weapon)
 		return false;
 	end;
 
-	if (weapon:GetNetworkedBool("Ironsights")) then
-		return true;
-	end;
-
 	if (weapon:GetNetworkedInt("Zoom") != 0) then
 		return true;
 	end;
