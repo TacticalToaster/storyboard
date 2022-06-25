@@ -1108,6 +1108,13 @@ function playerMeta:SetCrouchedWalkSpeed(speed, setClockworkVar)
 	self:ClockworkSetCrouchedWalkSpeed(speed);
 end;
 
+function playerMeta:ApplyMovementMultiplier(mult)
+	self:ClockworkSetWalkSpeed(self:GetWalkSpeed() * mult);
+	self:ClockworkSetCrouchedWalkSpeed(self:GetCrouchedWalkSpeed() * mult);
+	self:ClockworkSetRunSpeed(self:GetRunSpeed() * mult);
+	self:ClockworkSetJumpPower(self:GetJumpPower() * mult);
+end;
+
 -- A function to get whether a player has initialized.
 function playerMeta:HasInitialized()
 	return self.cwInitialized;
