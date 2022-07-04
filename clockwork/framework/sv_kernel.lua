@@ -5102,7 +5102,7 @@ end;
 	@returns {Unknown}
 --]]
 function Clockwork:KeyPress(player, key)
-	if (KEY == IN_RELOAD) then
+	if (key == IN_RELOAD) then
 		local infoTable = {
 			["raiseTime"] = .3 // TODO: Add default raise time config option
 		};
