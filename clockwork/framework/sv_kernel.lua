@@ -5143,6 +5143,7 @@ function Clockwork:KeyPress(player, key)
 				player:RunCommand("+duck");
 			end;
 		end;
+	end;
 	// Gutted normal weapon raise stuff and replaced with timer stuff instead
 end;
 
