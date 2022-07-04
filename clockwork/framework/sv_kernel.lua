@@ -5090,6 +5090,10 @@ function Clockwork:PlayerSpawnSENT(player, class)
 	end;
 end;
 
+function Clockwork:GetPlayerRaiseTime(player, infoTable)
+
+end;
+
 --[[
 	@codebase Server
 	@details Called when a player presses a key.
@@ -5103,7 +5107,9 @@ function Clockwork:KeyPress(player, key)
 			["raiseTime"] = .3 // TODO: Add default raise time config option
 		};
 
-		timer.Create("cwRaiseDelay"..player:SteamID(), cwPlugin:Call("GetPlayerRaiseTime", player, infoTable), 1, function()
+		cwPlugin:Call("GetPlayerRaiseTime", player, infoTable);
+
+		timer.Create("cwRaiseDelay"..player:SteamID(), infoTable.raiseTime, 1, function()
 			if (IsValid(player)) then
 				cwPly:ToggleWeaponRaised(player);
 				player.cwNextShootTime = curTime + cwConfig:Get("shoot_after_raise_time"):Get();
