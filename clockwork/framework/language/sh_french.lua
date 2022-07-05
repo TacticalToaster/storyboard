@@ -607,10 +607,10 @@ CW_FRENCH["StartingFlags"] = "Flags de départ";
 CW_FRENCH["StartingFlagsDesc"] = "Les flags avec lesquelles les joueurs commence.";
 CW_FRENCH["PlayerSprayEnabled"] = "Spray Activé";
 CW_FRENCH["PlayerSprayEnabledDesc"] = "Si oui ou non vous voulez activer les tags des joueurs.";
-CW_ENGLISH["OperatorFlags"] = "Indicateurs d'opérateur donnés";
-CW_ENGLISH["OperatorFlagsDesc"] = "Lors de l'utilisation de /chargetflags, l'opérateur recevra les drapeaux suivants.";
-CW_ENGLISH["AdminFlags"] = "Indicateurs d'administration donnés";
-CW_ENGLISH["AdminFlagsDesc"] = "Lors de l'utilisation de /chargetflags, les administrateurs recevront les drapeaux suivants.";
+CW_FRENCH["OperatorFlags"] = "Indicateurs d'opérateur donnés";
+CW_FRENCH["OperatorFlagsDesc"] = "Lors de l'utilisation de /chargetflags, l'opérateur recevra les drapeaux suivants.";
+CW_FRENCH["AdminFlags"] = "Indicateurs d'administration donnés";
+CW_FRENCH["AdminFlagsDesc"] = "Lors de l'utilisation de /chargetflags, les administrateurs recevront les drapeaux suivants.";
 -- Gutting: Removal of Hint Language Stuff
 CW_FRENCH["OutOfCharacterChatInterval"] = "Intervalle de conversation OOC";
 CW_FRENCH["OutOfCharacterChatIntervalDesc"] = "Le temps d'attente pour envoyer un message OOC (secondes).\nMettre à 0 pour pas de temps.";
