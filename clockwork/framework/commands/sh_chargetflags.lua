@@ -20,13 +20,13 @@ function COMMAND:OnRun(player, arguments)
     if (!target) then
         Clockwork.player:GiveFlags(player, flags);
     elseif (target) then
-        if (target:IsUserGroup("operator") do
+        if (target:IsUserGroup("operator")) then
             Clockwork.player:GiveFlags(target, Clockwork.config:Get("op_flags"):Get())
             Clockwork.player:NotifyAdmins("o", {"PlayerGavePlayerFlags", player:Name(), target:Name(), Clockwork.config:Get("op_flags"):Get()});
-        elseif (target:IsAdmin()) do
+        elseif (target:IsAdmin()) then
             Clockwork.player:GiveFlags(target, Clockwork.config:Get("admin_flags"):Get())
             Clockwork.player:NotifyAdmins("o", {"PlayerGavePlayerFlags", player:Name(), target:Name(), Clockwork.config:Get("admin_flags"):Get()});
-        elseif (target:IsSuperAdmin()) do
+        elseif (target:IsSuperAdmin()) then
             Clockwork.player:GiveFlags(target, flags);
             Clockwork.player:NotifyAdmins("o", {"PlayerGavePlayerFlags", player:Name(), target:Name(), flags});
         else
